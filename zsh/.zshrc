@@ -1,9 +1,9 @@
 # Na początku pliku (po bloku instant prompt)
-typeset -g POWERLEVEL9K_INSTANT_PROMPT=off
-
-if command -v tmux &> /dev/null && [ -z "$TMUX" ]; then
-  tmux attach-session -t default || tmux new-session -s default
-fi
+# typeset -g POWERLEVEL9K_INSTANT_PROMPT=off
+#
+# if command -v tmux &> /dev/null && [ -z "$TMUX" ]; then
+#   tmux attach-session -t default || tmux new-session -s default
+# fi
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
