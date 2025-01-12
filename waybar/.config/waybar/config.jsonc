@@ -2,7 +2,7 @@
   "position": "top",
   "modules-left": ["hyprland/workspaces"],
   "modules-center": ["hyprland/window"],
-  "modules-right": ["network", "pulseaudio", "battery", "clock"],
+  "modules-right": ["network", "pulseaudio", "temperature", "cpu", "battery", "clock"],
   "clock": {
     "format": "<span foreground='#f5c2e7'>   </span>{:%a %d %H:%M}",
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
@@ -36,5 +36,14 @@
           "default": ["", "", " "]
       },
       "on-click": "pavucontrol"
+  },
+  "cpu": {
+      "format": "<span size='13000' foreground='#89b4fa'> </span>{usage}%",
+      "interval": 1
+  },
+  "temperature": {
+      "format": "<span size='13000' foreground='#f5c2e7'> </span>{temperatureC}°C",
+      "format-critical": "<span size='13000' foreground='#f38ba8'> </span>{temperatureC}°C",
+      "critical-threshold": 80
   }
 }
