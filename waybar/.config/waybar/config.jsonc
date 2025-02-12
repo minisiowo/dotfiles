@@ -13,7 +13,10 @@
         "memory",
         "battery",
         "pulseaudio",
+        // "custom/bluetooth",
+        // "custom/network",
         "clock",
+        "tray",
         "custom/power"
     ],
     "hyprland/window": {
