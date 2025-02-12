@@ -13,7 +13,8 @@
         "memory",
         "battery",
         "pulseaudio",
-        "clock"
+        "clock",
+        "custom/power"
     ],
     "hyprland/window": {
         "max-length": 50
@@ -87,5 +88,10 @@
         "ignored-sinks": [
             "Easy Effects Sink"
         ]
+    },
+    "custom/power": {
+        "format": "⏻",
+        "tooltip": false,
+        "on-click": "bash -c '$HOME/.config/waybar/powermenu.sh'"
     }
 }

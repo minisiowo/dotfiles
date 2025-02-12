@@ -76,6 +76,7 @@ button:hover {
 #idle_inhibitor,
 #scratchpad,
 #power-profiles-daemon,
+#power,
 #mpd {
     padding: 0 10px;
     color: #ffffff;
@@ -315,5 +316,11 @@ label:focus {
 
 #privacy-item.audio-out {
     background-color: #0069d4;
+}
+
+#custom-power {
+    background-color: #64727D;
+    color: #FFFFFF;
+    padding: 0 10px 0 7px;
 }
 
