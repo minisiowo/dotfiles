@@ -35,10 +35,10 @@ vim.keymap.set('n', '<Left>', ':vertical resize -2<CR>', opts)
 vim.keymap.set('n', '<Right>', ':vertical resize +2<CR>', opts)
 
 -- Buffers
-vim.keymap.set('n', '<Tab>', ':bnext<CR>', opts)
-vim.keymap.set('n', '<S-Tab>', ':bprevious<CR>', opts)
-vim.keymap.set('n', '<leader>x', ':bdelete!<CR>', opts) -- close buffer
-vim.keymap.set('n', '<leader>b', '<cmd> enew <CR>', opts) -- new buffer
+vim.keymap.set('n', '<S-L>', ':bnext<CR>', opts)
+vim.keymap.set('n', '<S-H>', ':bprevious<CR>', opts)
+vim.keymap.set('n', '<leader>x', ':bdelete!<CR>', { desc = 'Close Current Buffer' }) -- close buffer
+vim.keymap.set('n', '<leader>b', '<cmd> enew <CR>', { desc = 'New Buffer' }) -- new buffer
 
 -- Window management
 vim.keymap.set('n', '<leader>v', '<C-w>v', opts) -- split window vertically
@@ -78,3 +78,15 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 vim.keymap.set('n', '<leader>f', function()
   vim.lsp.buf.format { async = true }
 end, { desc = 'Format document' })
+
+-- Mapowania dla trybu normalnego
+vim.keymap.set('n', 'j', function() return vim.v.count > 0 and 'j' or 'gj' end, { noremap = true, expr = true })
+vim.keymap.set('n', 'k', function() return vim.v.count > 0 and 'k' or 'gk' end, { noremap = true, expr = true })
+vim.keymap.set('n', '<Down>', function() return vim.v.count > 0 and '<Down>' or 'gj' end, { noremap = true, expr = true })
+vim.keymap.set('n', '<Up>', function() return vim.v.count > 0 and '<Up>' or 'gk' end, { noremap = true, expr = true })
+
+-- Mapowania dla trybu wizualnego
+vim.keymap.set('v', 'j', function() return vim.v.count > 0 and 'j' or 'gj' end, { noremap = true, expr = true })
+vim.keymap.set('v', 'k', function() return vim.v.count > 0 and 'k' or 'gk' end, { noremap = true, expr = true })
+vim.keymap.set('v', '<Down>', function() return vim.v.count > 0 and '<Down>' or 'gj' end, { noremap = true, expr = true })
+vim.keymap.set('v', '<Up>', function() return vim.v.count > 0 and '<Up>' or 'gk' end, { noremap = true, expr = true })

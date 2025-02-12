@@ -32,6 +32,8 @@ require('lazy').setup {
   require 'plugins.transparent',
   require 'plugins.debug',
   require 'plugins.markdown-render',
+  require 'plugins.obsidian',
+  require 'plugins.noice'
 }
 
 -- The line beneath this is called `modeline`. See `:help modeline`
