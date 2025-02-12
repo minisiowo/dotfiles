@@ -41,4 +41,14 @@ return {
       require('colorizer').setup()
     end,
   },
+  {
+    -- Notification system
+    'rcarriga/nvim-notify',
+    config = function()
+      require('notify').setup {
+        background_colour = '#000000', -- lub inny kolor pasujący do twojego motywu
+      }
+      vim.notify = require 'notify' -- Opcjonalnie: Nadpisuje domyślne powiadomienia Neovim
+    end,
+  },
 }
