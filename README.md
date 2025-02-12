@@ -34,3 +34,7 @@ git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
    - Poczekaj na zakończenie instalacji wszystkich skonfigurowanych wtyczek
 
 Wszystkie komponenty są teraz gotowe do użycia.
+
+## Ciekawostki...
+
+- `nwg-look` może łatwo ogarnąć kursor myszy, który zgadza się w większości apek na Hyprland
