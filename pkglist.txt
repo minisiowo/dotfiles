@@ -1,0 +1,91 @@
+# ── Hyprland setup ─────────────────────
+hyprland
+hyprpaper
+hypridle
+hyprlock
+xdg-desktop-portal-hyprland
+xdg-desktop-portal-gtk
+wlogout
+waybar
+tofi
+swaync
+grimblast-git
+cliphist
+hyprpicker
+pamixer
+pavucontrol
+wireplumber
+pipewire-pulse
+pipewire-alsa
+brightnessctl
+playerctl
+wl-clipboard
+
+# ── Terminal & CLI ─────────────────────
+kitty
+neovim
+tmux
+fish
+micro
+stow
+ripgrep
+tree
+glances
+rsync
+git
+wget
+curl
+
+# ── GUI Tools ──────────────────────────
+thunar
+nautilus
+viewnior
+okular
+obsidian
+telegram-desktop
+nwg-look
+qt5ct
+qt6ct
+kvantum
+kvantummanager
+org.kde.ark  # może być `ark` w pacmanie
+
+# ── AUR packages (install via yay) ─────
+yay
+banana-cursor-bin
+cachy-browser
+kvantum-theme-catppuccin-git
+ani-cli
+superfile
+jome  # emoji picker, jeśli to własny bin to pomiń
+sublime-text  # jeśli $editor-alt = subl rzeczywiście go używa
+
+# ── System Tools & Services ────────────
+blueman
+nm-applet
+udiskie
+polkit-kde-agent
+networkmanager
+network-manager-applet
+flatpak
+ufw
+
+# ── Fonts ──────────────────────────────
+ttf-cascadia-code-nerd
+ttf-cascadia-mono-nerd
+ttf-fira-code
+ttf-jetbrains-mono-nerd
+ttf-iosevka-nerd
+ttf-meslo-nerd
+ttf-nerd-fonts-symbols
+noto-fonts
+noto-fonts-cjk
+noto-fonts-emoji
+noto-color-emoji-fontconfig
+
+# ── Virtualizacja i dev tools ─────────
+virt-manager
+qemu-full
+libvirt
+docker
+base-devel
