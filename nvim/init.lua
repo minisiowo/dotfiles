@@ -23,7 +23,9 @@ require('lazy').setup {
   require 'plugins.telescope',
   require 'plugins.lsp',
   require 'plugins.autocompletion',
-  require 'plugins.none-ls',
+  require 'plugins.mason',
+  require 'plugins.conform',
+  require 'plugins.nvim-lint',
   require 'plugins.gitsigns',
   require 'plugins.indent-blankline',
   require 'plugins.misc',
@@ -31,6 +33,3 @@ require('lazy').setup {
   require 'plugins.transparent',
   require 'plugins.markdown-render',
 }
-
--- The line beneath this is called `modeline`. See `:help modeline`
--- vim: ts=2 sts=2 sw=2 et
