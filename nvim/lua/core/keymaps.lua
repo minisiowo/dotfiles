@@ -76,8 +76,13 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 
 -- Format Current Buffer
 vim.keymap.set('n', '<leader>f', function()
-  vim.lsp.buf.format { async = true }
+  require('conform').format({ async = true, lsp_fallback = true })
 end, { desc = 'Format document' })
+
+-- Lint Current Buffer  
+vim.keymap.set('n', '<leader>l', function()
+  require('lint').try_lint()
+end, { desc = 'Trigger linting for current file' })
 
 -- Mapowania dla trybu normalnego
 vim.keymap.set('n', 'j', function() return vim.v.count > 0 and 'j' or 'gj' end, { noremap = true, expr = true })
