@@ -1,0 +1,25 @@
+font-family = JetBrainsMono Nerd Font Mono
+font-style = SemiBold
+# font-synthetic-style = bold
+
+theme = "Github Dark"
+background = #303030
+foreground = ffffff
+
+window-padding-x = 4,4
+window-padding-y = 4,4
+
+cursor-style = block
+shell-integration-features = no-cursor
+cursor-style-blink = false
+# selection-background = #9DCAEF
+# cursor-color = #9DCAEF
+
+# This only works on linux ... 
+# Dostosowuje kolor do background
+# window-theme = ghostty
+
+window-theme = auto
+macos-titlebar-style = transparent
+background-opacity = 0.8
+background-blur = true
