@@ -1,3 +1,75 @@
-tmux/.config/tmux/plugins
+# .gitignore for dotfiles repository
+
+# -----------------------------------------------------------------------------
+# Operating system files
 .DS_Store
-nvim/.config/nvim/lazy-lock.json
+.AppleDouble
+.LSOverride
+Icon?
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.Trashes
+.Trash-*
+
+# -----------------------------------------------------------------------------
+# Temporary and backup files
+*~
+*.tmp
+*.temp
+*.bak
+*.orig
+*.old
+*.backup
+
+# -----------------------------------------------------------------------------
+# Vim and Neovim swap, undo, and session files
+*.sw?
+Session.vim
+tags
+*.netrwhist
+
+# Neovim plugin lock file
+**/lazy-lock.json
+
+# -----------------------------------------------------------------------------
+# Emacs backup and auto-save files
+\#*\#
+.#*
+
+# -----------------------------------------------------------------------------
+# IDE and editor directories
+.idea/
+.vscode/
+
+# -----------------------------------------------------------------------------
+# Node.js dependencies and logs
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# -----------------------------------------------------------------------------
+# Python bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+
+# -----------------------------------------------------------------------------
+# Log files
+*.log
+
+# -----------------------------------------------------------------------------
+# Archives and compressed files
+*.zip
+*.tar.gz
+*.tar
+*.gz
+
+# -----------------------------------------------------------------------------
+# Caches
+.cache/
+
+# -----------------------------------------------------------------------------
+# Tmux plugin manager
+tmux/.config/tmux/plugins/
