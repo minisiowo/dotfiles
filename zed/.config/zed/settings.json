@@ -20,7 +20,7 @@
   "theme": {
     "mode": "dark",
     "light": "One Light",
-    "dark": "Ayu Dark"
+    "dark": "One Dark - Darkened"
   },
   "buffer_line_height": { "custom": 1.4 },
   "buffer_font_weight": 350, //default is 400
@@ -29,5 +29,6 @@
   "tabs": { "file_icons": true },
   "git": { "inline_blame": { "enabled": false } },
   "current_line_highlight": "none",
-  "restore_on_startup": "last_workspace"
+  "restore_on_startup": "last_workspace",
+  "format_on_save": "off"
 }
