@@ -1,0 +1,43 @@
+# Neovim swap files
+*.swp
+*.swo
+
+# Neovim backup files
+*~
+*.tmp
+
+# Neovim undo files
+*.un~
+
+# Neovim view files
+*.view
+
+# Plugin managers
+lazy.nvim/
+plugged/
+site/pack/
+lazy-lock.json
+
+# Cache i dane sesji
+.netrwhist
+tags
+.tags
+Session.vim
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+Thumbs.db
+ehthumbs.db
+
+# Lokalne pliki konfiguracyjne
+lua/local/
+local.lua
+
+# Language Server Protocol
+.null-ls_*
+.luarc.json
+
+# Debug logs
+*.log
