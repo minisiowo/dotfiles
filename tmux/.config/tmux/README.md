@@ -1,115 +1,108 @@
-## ✅ `README.md` – Tmux Config (Dominik)
+# Przewodnik po konfiguracji TMUX
 
-### 📦 TPM (Plugin Manager)
+Dokumentacja oparta na aktualnym pliku konfiguracyjnym `tmux.conf`.
 
-Plik automatycznie:
+## 1. Czym jest TMUX?
+TMUX (Terminal Multiplexer) to narzędzie, które pozwala "rozmnożyć" jedno okno terminala na wiele niezależnych sesji, okien i paneli. Działa jako serwer w tle, co oznacza, że nawet jeśli zamkniesz emulator terminala (np. Alacritty, Kitty) lub zerwie Ci się połączenie SSH, Twoje programy wewnątrz TMUX-a nadal działają i możesz do nich wrócić.
 
-* sprawdza, czy TPM jest zainstalowany (`~/.config/tmux/plugins/tpm`)
-* instaluje go przy pierwszym uruchomieniu
+## 2. Podstawowe pojęcia (Hierarchia)
+Zrozumienie tej hierarchii jest kluczowe dla efektywnej pracy:
 
-Pluginy w użyciu:
-
-* `tpm` – plugin manager
-* `vim-tmux-navigator` – płynna nawigacja między vim a tmux
-* `tmux-resurrect` – zapis i przywracanie sesji
-* `tmux-continuum` – auto-save co 15 min
-* `minimal-tmux-status` – prosty pasek statusu
+*   **Sesja (Session):** Najwyższy poziom. Zbiór okien dedykowany konkretnemu zadaniu (np. jedna sesja dla projektu "Frontend", druga dla "Backend"). Sesje są izolowane od siebie, ale można się między nimi łatwo przełączać.
+*   **Okno (Window):** Odpowiednik "karty" (tab) w przeglądarce internetowej. Zajmuje cały widoczny ekran terminala. W ramach jednej sesji możesz mieć wiele okien.
+*   **Panel (Pane):** Podział wewnątrz okna. Ekran można podzielić na mniejsze prostokąty (np. kod po lewej, terminal po prawej). Wszystkie panele w oknie są widoczne jednocześnie.
 
 ---
 
-### 🧠 Podział organizacyjny Tmux
+## 3. Klawisz Główny (Prefix)
+Większość komend w TMUX wymaga wciśnięcia kombinacji wstępnej, zwanej **Prefixem**.
 
-* **Session** = osobny projekt lub kontekst (`java`, `dotfiles`, `work`)
-* **Window** = "karta" w sesji (`editor`, `git`, `server`)
-* **Pane** = podział ekranu (np. vim obok logów)
+**Twój Prefix:** `Ctrl` + `b`
 
----
-
-### ⌨️ Klawisze i skróty
-
-#### 📁 Ogólne
-
-| Skrót           | Działanie                              |
-| --------------- | -------------------------------------- |
-| `Ctrl + b`, `r` | Przeładuj config (`reload`)            |
-| `Ctrl + b`, `?` | Lista wszystkich skrótów (`list-keys`) |
-| `Ctrl + b`, `m` | Zoom/odzoom panelu                     |
+Aby wykonać komendę (np. otworzyć nowe okno), najpierw wciskasz `Ctrl+b`, puszczasz te klawisze, a następnie wciskasz klawisz właściwej funkcji (np. `c`).
 
 ---
 
-#### 📦 Sesje
+## 4. Zarządzanie Panelami (Panes)
+Twoja konfiguracja ułatwia dzielenie ekranu i nawigację.
 
-| Skrót             | Działanie                              |
-| ----------------- | -------------------------------------- |
-| `Ctrl + b`, `s`   | Wybór sesji z listy (`choose-session`) |
-| `Ctrl + b`, `C-n` | Nowa sesja przez popup (`read`)        |
-| `Ctrl + b`, `C-j` | Przełącz sesję przez `fzf` w popupie   |
-| `Ctrl + b`, `C-e` | Zmień nazwę bieżącej sesji (popup)     |
+### Tworzenie paneli
+*   **Podział poziomy** (obok siebie): `Prefix` + `\`
+*   **Podział pionowy** (góra/dół): `Prefix` + `-`
+    *   *Nowe panele otwierają się w tej samej ścieżce (katalogu), co aktualny panel.*
 
----
+### Nawigacja (vim-tmux-navigator)
+Dzięki pluginowi możesz poruszać się między panelami używając `Ctrl` (bez prefixu):
+*   `Ctrl` + `h` (lewo)
+*   `Ctrl` + `j` (dół)
+*   `Ctrl` + `k` (góra)
+*   `Ctrl` + `l` (prawo)
 
-#### 🗂 Okna
-
-| Skrót               | Działanie                            |
-| ------------------- | ------------------------------------ |
-| `Ctrl + b`, `w`     | Wybór okna z listy (`choose-window`) |
-| `Ctrl + b`, `c`     | Nowe okno (w tym samym katalogu)     |
-| `Ctrl + b`, `n`     | Następne okno                        |
-| `Ctrl + b`, `p`     | Poprzednie okno                      |
-| `Ctrl + b`, `1`-`9` | Skok do okna wg numeru               |
+### Rozmiar i Zoom
+*   `Prefix` + `h` / `j` / `k` / `l`: Zmiana rozmiaru panelu (o 5 jednostek).
+*   `Prefix` + `m`: **Zoom** (maksymalizacja panelu na cały ekran). Ponowne użycie przywraca widok podziału.
 
 ---
 
-#### 🧱 Panele
-
-| Skrót                 | Działanie                    |
-| --------------------- | ---------------------------- |
-| `Ctrl + b`, `-`       | Podział pionowy (góra/dół)   |
-| `Ctrl + b`, `\`       | Podział poziomy (lewo/prawo) |
-| `Ctrl + b`, `h/j/k/l` | Zmiana rozmiaru panelu       |
-| `Ctrl + b`, `o`       | Przełącz między panelami     |
-
----
-
-#### 📋 Tryb kopiowania
-
-| Skrót                    | Działanie                      |
-| ------------------------ | ------------------------------ |
-| `Ctrl + b`, `[`          | Wejście w tryb kopiowania (vi) |
-| `v` (w trybie copy-mode) | Zaznacz tekst                  |
-| `y` (w trybie copy-mode) | Kopiuj do `wl-copy`            |
-| `Ctrl + b`, `P`          | Wklej z bufora                 |
+## 5. Zarządzanie Oknami (Windows)
+*   **Nowe okno:** `Prefix` + `c`
+*   **Zmiana nazwy okna:** `Prefix` + `,`
+*   **Przełączanie okien:**
+    *   `Prefix` + `1`, `2`... (numeracja od 1)
+    *   `Prefix` + `n` (następne) / `p` (poprzednie)
+    *   `Prefix` + `w` (lista wszystkich okien i sesji)
 
 ---
 
-#### 💻 Popup terminale
+## 6. Zarządzanie Sesjami i Popupy
+Twoja konfiguracja zawiera potężne skrypty w pływających oknach (Popups).
 
-| Skrót             | Co robi                              |
-| ----------------- | ------------------------------------ |
-| `Ctrl + b`, `C-t` | Otwiera popup z nowym `bash`         |
-| `Ctrl + b`, `C-m` | Uruchamia `java Main.java` w popupie |
-
----
-
-### 📌 Inne
-
-* Numeracja okien i paneli zaczyna się od `1`
-* Historia terminala: `1 000 000` linii
-* True-color (24-bit) i systemowy schowek: włączone
-* `ESC` działa natychmiast (escape-time 0)
+*   **Nowa sesja:** `Prefix` + `Ctrl+n`  
+    Pyta o nazwę i tworzy nową, czystą sesję.
+*   **Przełącz sesję:** `Prefix` + `Ctrl+j`  
+    Wyświetla listę sesji w `fzf`. Najszybsza metoda nawigacji między projektami.
+*   **Zmień nazwę sesji:** `Prefix` + `Ctrl+e`
+*   **Pływający terminal:** `Prefix` + `Ctrl+t`  
+    Otwiera tymczasowy terminal na wierzchu (overlay). Idealny do szybkich komend gitowych bez wychodzenia z edytora.
 
 ---
 
-### 🔧 TPM – instalacja pluginów
+## 7. Tryb Kopiowania (Copy Mode)
+Skonfigurowany w stylu VI (`mode-keys vi`) ze wsparciem dla schowka systemowego.
 
-Uruchom tmuxa i wciśnij:
-
-```
-Ctrl + b, Shift + I
-```
-
-Instaluje pluginy zdefiniowane w `@plugin`.
+1.  **Wejście:** `Prefix` + `[`
+2.  **Nawigacja:** Strzałki lub `h/j/k/l`.
+3.  **Zaznaczanie:** Wciśnij `v`, aby zacząć zaznaczać tekst.
+4.  **Kopiowanie:** Wciśnij `y`. Tekst trafi do schowka systemowego (dzięki `wl-copy`).
+5.  **Wklejenie:** `Prefix` + `P` (lub standardowe `Ctrl+V` systemu, jeśli terminal to obsługuje).
 
 ---
 
-Potrzebujesz też wersji po polsku? Albo wersji w stylu cheat-sheet `.pdf` / `.md`?
+## 8. Pluginy i Inne
+
+### Zainstalowane pluginy (TPM)
+*   `vim-tmux-navigator`: Integracja nawigacji z Vimem.
+*   `tmux-resurrect` / `tmux-continuum`: Zapisywanie i przywracanie stanu sesji (nawet po restarcie komputera).
+*   `minimal-tmux-status`: Minimalistyczny pasek statusu.
+
+### Przydatne komendy
+*   **Przeładuj config:** `Prefix` + `r` (użyj po edycji `tmux.conf`).
+*   **Instalacja pluginów:** `Prefix` + `I` (duże i) - jeśli dodasz nowe pluginy do pliku.
+*   **Wymuś zapis sesji:** `Prefix` + `Ctrl+s`
+*   **Wymuś przywrócenie sesji:** `Prefix` + `Ctrl+r`
+
+---
+
+## ⚡ Cheatsheet (Skrócona ściąga)
+
+| Akcja | Skrót (po Ctrl+b) | Uwagi |
+| :--- | :--- | :--- |
+| **Podział poziomy** | `\` | Zamiast standardowego `%` |
+| **Podział pionowy** | `-` | Zamiast standardowego `"` |
+| **Nowe okno** | `c` | |
+| **Zoom panelu** | `m` | Toggle (włącz/wyłącz) |
+| **Nawigacja** | `Ctrl + h/j/k/l` | **Bez prefixu!** |
+| **Szukaj sesji** | `Ctrl + j` | Wymaga prefixu |
+| **Nowa sesja** | `Ctrl + n` | Wymaga prefixu |
+| **Pływający term** | `Ctrl + t` | Wymaga prefixu |
+| **Przeładuj config** | `r` | |
