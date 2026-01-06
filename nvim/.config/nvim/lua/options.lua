@@ -18,6 +18,8 @@ vim.opt.winborder = "rounded" -- okna są zaokrąglone
 
 vim.opt.clipboard = "unnamedplus"
 
+vim.opt.autoread = true
+
 -- Powoduje centrowanie pliku
 vim.opt.scrolloff = 999
 
