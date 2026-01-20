@@ -73,3 +73,5 @@ __pycache__/
 # -----------------------------------------------------------------------------
 # Tmux plugin manager
 tmux/.config/tmux/plugins/
+
+opencode/.config/opencode/antigravity-accounts.json
