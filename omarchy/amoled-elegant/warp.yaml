@@ -1,0 +1,26 @@
+name: Amoled Black
+accent: "#e0e0e0"
+cursor: "#e0e0e0"
+background: "#000000"
+foreground: "#e0e0e0"
+details: darker
+
+terminal_colors:
+  normal:
+    black:   "#000000"
+    red:     "#e19e74"
+    green:   "#a5a297"
+    yellow:  "#c6c4b0"
+    blue:    "#605d5b"
+    magenta: "#8a8575"
+    cyan:    "#C2BBB0"
+    white:   "#d0d0d0"
+  bright:
+    black:   "#383735"
+    red:     "#984b1e"
+    green:   "#637380"
+    yellow:  "#8f4445"
+    blue:    "#b7a798"
+    magenta: "#b3adad"
+    cyan:    "#90947a"
+    white:   "#ffffff"
