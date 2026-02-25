@@ -20,12 +20,16 @@ mode_close() {
   MONITORS_COUNT=$(hyprctl monitors all | grep -c "Monitor")
   if [[ $MONITORS_COUNT -gt 1 ]]; then
     hyprctl keyword monitor "$INTERNAL_DISPLAY, disable"
+    sleep 1
+    omarchy-restart-waybar
   fi
 }
 
 mode_open() {
   # Force enable internal screen
   hyprctl keyword monitor "$INTERNAL_DISPLAY, preferred, auto, 1"
+  sleep 1
+  omarchy-restart-waybar
 }
 
 # --- LOGIC ---
