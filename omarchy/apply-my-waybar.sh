@@ -6,8 +6,8 @@ TEMP_FILE=$(mktemp)
 
 # Use jq to update specific keys to match user preference
 jq '
-  ."modules-left" = ["clock"] |
-  ."modules-center" = ["hyprland/workspaces", "custom/update", "custom/voxtype", "custom/screenrecording-indicator"] |
+  ."modules-left" = ["clock", "custom/update", "custom/voxtype", "custom/screenrecording-indicator", "custom/idle-indicator", "custom/notification-silencing-indicator"] |
+  ."modules-center" = ["hyprland/workspaces"] |
   ."modules-right" = ["group/tray-expander", "bluetooth", "network", "pulseaudio", "cpu", "battery", "custom/omarchy"] |
   ."custom/omarchy".format = "💀" |
   ."hyprland/workspaces"."format-icons"."10" = ""
