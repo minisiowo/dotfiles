@@ -21,6 +21,8 @@ mode_close() {
   if [[ $MONITORS_COUNT -gt 1 ]]; then
     hyprctl keyword monitor "$INTERNAL_DISPLAY, disable"
     sleep 1
+    hyprctl dispatch moveworkspacetomonitor 1 DP-2
+    hyprctl dispatch workspace 1
     omarchy-restart-waybar
   fi
 }
@@ -29,6 +31,7 @@ mode_open() {
   # Force enable internal screen
   hyprctl keyword monitor "$INTERNAL_DISPLAY, preferred, auto, 1"
   sleep 1
+  hyprctl dispatch moveworkspacetomonitor 1 eDP-1
   omarchy-restart-waybar
 }
 
@@ -43,8 +46,11 @@ elif [[ "$1" == "open" ]]; then
 
 elif [[ "$1" == "check" ]]; then
   # Silent check for startup/reload to sync state
+  # Note: avoid restarting waybar on lid-open check to prevent race condition
+  # with exec-once waybar startup (both would try to launch waybar at the same time).
+  # Waybar auto-appears on newly enabled monitors, so no restart needed here.
   if grep -q "open" /proc/acpi/button/lid/*/state; then
-    mode_open
+    hyprctl keyword monitor "$INTERNAL_DISPLAY, preferred, auto, 1"
   else
     mode_close
   fi
