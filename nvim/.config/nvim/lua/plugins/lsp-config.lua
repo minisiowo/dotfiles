@@ -2,7 +2,12 @@ return {
     {
         -- kolejność jest ważna, najpierw mason, potem mason-lsp a na końcu nvim-lsp
         "mason-org/mason.nvim",
-        opts = {},
+        opts = {
+            registries = {
+                "github:mason-org/mason-registry",
+                "github:Crashdummyy/mason-registry",
+            },
+        },
     },
     {
         "WhoIsSethDaniel/mason-tool-installer.nvim",
@@ -10,6 +15,8 @@ return {
         opts = {
             -- tutaj nazwy z Mason'a, a nie nazwy LSP
             ensure_installed = {
+                "json-lsp",            -- LSP: jsonls
+                "roslyn",              -- LSP: roslyn (via roslyn.nvim)
                 "tinymist",            -- LSP: tinymist
                 "lua-language-server", -- LSP: lua_ls
                 "jdtls",               -- Java (odpala nvim-jdtls)
@@ -35,8 +42,10 @@ return {
                 },
             })
 
+            vim.lsp.config('jsonls', {})
+
             -- tutaj nazwy LSP, nie nazwy z MASON'A (od neovim 11+)
-            vim.lsp.enable({"lua_ls", "tinymist"})
+            vim.lsp.enable({"lua_ls", "tinymist", "jsonls"})
         end
     },
     -- for java LSP, dlatego nie uruchamiam tego w lsp.enable
