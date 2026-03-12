@@ -3,10 +3,16 @@ return {
         "folke/which-key.nvim",
         event = "VeryLazy",
         opts = {
-            -- preset = "helix"
-            -- your configuration comes here
-            -- or leave it empty to use the default settings
-            -- refer to the configuration section below
+            spec = {
+                { "<leader>b", group = "Buffer" },
+                { "<leader>c", group = "Code" },
+                { "<leader>f", group = "Find" },
+                { "<leader>g", group = "Goto" },
+                { "<leader>l", group = "LSP" },
+                { "<leader>n", group = "Notifications" },
+                { "<leader>t", group = "Terminal" },
+                { "<leader>v", group = "Visual" },
+            },
         },
     },
 }

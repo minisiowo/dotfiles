@@ -27,17 +27,36 @@ return {
             },
             highlights = {
                 fill = {
-                    bg = "NONE",
+                    bg = {
+                        attribute = "bg",
+                        highlight = "StatusLine",
+                    },
                 },
                 background = {
-                    bg = "NONE",
+                    bg = {
+                        attribute = "bg",
+                        highlight = "StatusLine",
+                    },
+                    fg = {
+                        attribute = "fg",
+                        highlight = "Comment",
+                    },
+                },
+                buffer = {
+                    bg = {
+                        attribute = "bg",
+                        highlight = "StatusLine",
+                    },
                     fg = {
                         attribute = "fg",
                         highlight = "Comment",
                     },
                 },
                 buffer_visible = {
-                    bg = "NONE",
+                    bg = {
+                        attribute = "bg",
+                        highlight = "StatusLine",
+                    },
                     fg = {
                         attribute = "fg",
                         highlight = "Comment",
@@ -55,13 +74,55 @@ return {
                     bold = true,
                     italic = false,
                 },
+                close_button = {
+                    bg = {
+                        attribute = "bg",
+                        highlight = "StatusLine",
+                    },
+                    fg = {
+                        attribute = "fg",
+                        highlight = "Comment",
+                    },
+                },
+                close_button_visible = {
+                    bg = {
+                        attribute = "bg",
+                        highlight = "StatusLine",
+                    },
+                    fg = {
+                        attribute = "fg",
+                        highlight = "Comment",
+                    },
+                },
+                close_button_selected = {
+                    bg = {
+                        attribute = "bg",
+                        highlight = "CursorLine",
+                    },
+                    fg = {
+                        attribute = "fg",
+                        highlight = "Normal",
+                    },
+                },
                 separator = {
-                    bg = "NONE",
-                    fg = "NONE",
+                    bg = {
+                        attribute = "bg",
+                        highlight = "StatusLine",
+                    },
+                    fg = {
+                        attribute = "bg",
+                        highlight = "StatusLine",
+                    },
                 },
                 separator_visible = {
-                    bg = "NONE",
-                    fg = "NONE",
+                    bg = {
+                        attribute = "bg",
+                        highlight = "StatusLine",
+                    },
+                    fg = {
+                        attribute = "bg",
+                        highlight = "StatusLine",
+                    },
                 },
                 separator_selected = {
                     bg = {
@@ -80,8 +141,44 @@ return {
                         highlight = "Directory",
                     },
                 },
+                duplicate = {
+                    bg = {
+                        attribute = "bg",
+                        highlight = "StatusLine",
+                    },
+                    fg = {
+                        attribute = "fg",
+                        highlight = "Comment",
+                    },
+                    italic = false,
+                },
+                duplicate_visible = {
+                    bg = {
+                        attribute = "bg",
+                        highlight = "StatusLine",
+                    },
+                    fg = {
+                        attribute = "fg",
+                        highlight = "Comment",
+                    },
+                    italic = false,
+                },
+                duplicate_selected = {
+                    bg = {
+                        attribute = "bg",
+                        highlight = "CursorLine",
+                    },
+                    fg = {
+                        attribute = "fg",
+                        highlight = "Normal",
+                    },
+                    italic = false,
+                },
                 modified = {
-                    bg = "NONE",
+                    bg = {
+                        attribute = "bg",
+                        highlight = "StatusLine",
+                    },
                     fg = {
                         attribute = "fg",
                         highlight = "String",
@@ -97,8 +194,63 @@ return {
                         highlight = "String",
                     },
                 },
+                modified_visible = {
+                    bg = {
+                        attribute = "bg",
+                        highlight = "StatusLine",
+                    },
+                    fg = {
+                        attribute = "fg",
+                        highlight = "String",
+                    },
+                },
+                numbers = {
+                    bg = {
+                        attribute = "bg",
+                        highlight = "StatusLine",
+                    },
+                    fg = {
+                        attribute = "fg",
+                        highlight = "Comment",
+                    },
+                },
+                numbers_visible = {
+                    bg = {
+                        attribute = "bg",
+                        highlight = "StatusLine",
+                    },
+                    fg = {
+                        attribute = "fg",
+                        highlight = "Comment",
+                    },
+                },
+                numbers_selected = {
+                    bg = {
+                        attribute = "bg",
+                        highlight = "CursorLine",
+                    },
+                    fg = {
+                        attribute = "fg",
+                        highlight = "Normal",
+                    },
+                    bold = true,
+                    italic = false,
+                },
                 diagnostic = {
-                    bg = "NONE",
+                    bg = {
+                        attribute = "bg",
+                        highlight = "StatusLine",
+                    },
+                    fg = {
+                        attribute = "fg",
+                        highlight = "Comment",
+                    },
+                },
+                diagnostic_visible = {
+                    bg = {
+                        attribute = "bg",
+                        highlight = "StatusLine",
+                    },
                     fg = {
                         attribute = "fg",
                         highlight = "Comment",
@@ -109,9 +261,89 @@ return {
                         attribute = "bg",
                         highlight = "CursorLine",
                     },
+                    italic = false,
+                },
+                hint = {
+                    bg = {
+                        attribute = "bg",
+                        highlight = "StatusLine",
+                    },
+                },
+                hint_visible = {
+                    bg = {
+                        attribute = "bg",
+                        highlight = "StatusLine",
+                    },
+                },
+                hint_selected = {
+                    bg = {
+                        attribute = "bg",
+                        highlight = "CursorLine",
+                    },
+                    italic = false,
+                },
+                info = {
+                    bg = {
+                        attribute = "bg",
+                        highlight = "StatusLine",
+                    },
+                },
+                info_visible = {
+                    bg = {
+                        attribute = "bg",
+                        highlight = "StatusLine",
+                    },
+                },
+                info_selected = {
+                    bg = {
+                        attribute = "bg",
+                        highlight = "CursorLine",
+                    },
+                    italic = false,
+                },
+                warning = {
+                    bg = {
+                        attribute = "bg",
+                        highlight = "StatusLine",
+                    },
+                },
+                warning_visible = {
+                    bg = {
+                        attribute = "bg",
+                        highlight = "StatusLine",
+                    },
+                },
+                warning_selected = {
+                    bg = {
+                        attribute = "bg",
+                        highlight = "CursorLine",
+                    },
+                    italic = false,
+                },
+                error = {
+                    bg = {
+                        attribute = "bg",
+                        highlight = "StatusLine",
+                    },
+                },
+                error_visible = {
+                    bg = {
+                        attribute = "bg",
+                        highlight = "StatusLine",
+                    },
+                },
+                error_selected = {
+                    bg = {
+                        attribute = "bg",
+                        highlight = "CursorLine",
+                    },
+                    italic = false,
                 },
                 offset_separator = {
-                    bg = "NONE",
+                    bg = {
+                        attribute = "bg",
+                        highlight = "StatusLine",
+                    },
                     fg = {
                         attribute = "fg",
                         highlight = "WinSeparator",
@@ -130,7 +362,7 @@ return {
                 function()
                     require("snacks").bufdelete()
                 end,
-                desc = "Close buffer",
+                desc = "Close current buffer",
             },
         },
     },
