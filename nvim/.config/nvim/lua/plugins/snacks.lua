@@ -35,7 +35,7 @@ return {
                 function()
                     require("snacks").explorer()
                 end,
-                desc = "Explorer",
+                desc = "Toggle file explorer",
             },
             {
                 "<leader>ff",
@@ -49,42 +49,42 @@ return {
                 function()
                     require("snacks").picker.grep()
                 end,
-                desc = "Live grep",
+                desc = "Search by grep",
             },
             {
                 "<leader>fb",
                 function()
                     require("snacks").picker.buffers()
                 end,
-                desc = "Buffers",
+                desc = "Find buffers",
             },
             {
                 "<leader>fh",
                 function()
                     require("snacks").picker.help()
                 end,
-                desc = "Help",
+                desc = "Search help tags",
             },
             {
                 "<leader>tt",
                 function()
                     require("snacks").terminal()
                 end,
-                desc = "Terminal",
+                desc = "Toggle terminal",
             },
             {
                 "<leader>nh",
                 function()
                     require("snacks").notifier.show_history()
                 end,
-                desc = "Notification history",
+                desc = "Show notification history",
             },
             {
                 "<leader>nd",
                 function()
                     require("snacks").notifier.hide()
                 end,
-                desc = "Dismiss notifications",
+                desc = "Dismiss all notifications",
             },
         },
     },

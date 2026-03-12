@@ -31,21 +31,34 @@ return {
         lazy = false,
         config = function()
             vim.lsp.set_log_level("error")
-            vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
-            vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, {})
-            vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, {})
-            vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, {})
+            vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Hover" })
+            vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, { desc = "Go to definition" })
+            vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, { desc = "Show references" })
+            vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code action" })
 
-            vim.lsp.config('tinymist', {
+            vim.lsp.config("tinymist", {
                 settings = {
                     formatterMode = "typstyle",
                 },
             })
 
-            vim.lsp.config('jsonls', {})
+            vim.lsp.config("lua_ls", {
+                settings = {
+                    Lua = {
+                        diagnostics = {
+                            globals = { "vim" },
+                        },
+                        workspace = {
+                            checkThirdParty = "Disable",
+                        },
+                    },
+                },
+            })
+
+            vim.lsp.config("jsonls", {})
 
             -- tutaj nazwy LSP, nie nazwy z MASON'A (od neovim 11+)
-            vim.lsp.enable({"lua_ls", "tinymist", "jsonls"})
+            vim.lsp.enable({ "lua_ls", "tinymist", "jsonls" })
         end
     },
     -- for java LSP, dlatego nie uruchamiam tego w lsp.enable
