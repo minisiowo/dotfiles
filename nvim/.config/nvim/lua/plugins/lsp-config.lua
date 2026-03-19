@@ -19,7 +19,7 @@ return {
                 "roslyn",              -- LSP: roslyn (via roslyn.nvim)
                 "tinymist",            -- LSP: tinymist
                 "lua-language-server", -- LSP: lua_ls
-                "jdtls",               -- Java (odpala nvim-jdtls)
+                -- "jdtls",               -- Java (odpala nvim-jdtls)
             },
             run_on_start = true,
             auto_update = false,
@@ -62,5 +62,5 @@ return {
         end
     },
     -- for java LSP, dlatego nie uruchamiam tego w lsp.enable
-    { "mfussenegger/nvim-jdtls" },
+    -- { "mfussenegger/nvim-jdtls" },
 }
