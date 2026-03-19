@@ -54,8 +54,16 @@ vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "Go to lower window" })
 vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "Go to upper window" })
 vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Go to right window" })
 
-vim.keymap.set("n", "H", "<cmd>BufferLineCyclePrev<CR>", { desc = "Previous buffer" })
-vim.keymap.set("n", "L", "<cmd>BufferLineCycleNext<CR>", { desc = "Next buffer" })
+vim.keymap.set("n", "<leader>sh", "<cmd>split<CR>", { desc = "Split horizontally" })
+vim.keymap.set("n", "<leader>sv", "<cmd>vsplit<CR>", { desc = "Split vertically" })
+vim.keymap.set("n", "<leader>s=", "<C-w>=", { desc = "Equalize splits" })
+vim.keymap.set("n", "<leader>sH", "<cmd>vertical resize -5<CR>", { desc = "Shrink split width" })
+vim.keymap.set("n", "<leader>sL", "<cmd>vertical resize +5<CR>", { desc = "Grow split width" })
+vim.keymap.set("n", "<leader>sJ", "<cmd>resize -3<CR>", { desc = "Shrink split height" })
+vim.keymap.set("n", "<leader>sK", "<cmd>resize +3<CR>", { desc = "Grow split height" })
+
+vim.keymap.set("n", "H", "<cmd>bprevious<CR>", { desc = "Previous buffer" })
+vim.keymap.set("n", "L", "<cmd>bnext<CR>", { desc = "Next buffer" })
 
 -- Line content select
 vim.keymap.set("n", "<leader>vl", "_vg_", { desc = "Select line without indent" })
@@ -66,6 +74,3 @@ vim.keymap.set("n", "<Esc>", function()
         vim.cmd("nohlsearch")
     end
 end, { desc = "Clear search highlight" })
-
--- Build in LSP Related
-vim.keymap.set("n", "<leader>lf", vim.lsp.buf.format, { desc = "Format buffer" })
