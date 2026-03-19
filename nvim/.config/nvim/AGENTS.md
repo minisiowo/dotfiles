@@ -1,23 +1,24 @@
 # Repository Guidelines
 
 ## Project Structure & Module Organization
-This repository is a Lua-based Neovim configuration rooted at `init.lua`. Core editor settings live in `lua/options.lua`, autocommands in `lua/autocmds.lua`, and Java-specific LSP bootstrap code in `lua/jdtls/jdtls_setup.lua`. Plugin specs are split into one file per feature under `lua/plugins/` such as `lsp-config.lua`, `treesitter.lua`, and `neo-tree.lua`. Post-load tweaks that rely on plugin runtime state belong in `after/plugin/`.
+This repository is a Lua-based Neovim configuration rooted at `init.lua`. Startup bootstraps `lazy.nvim`, then loads `lua/options.lua`, plugin specs from `lua/plugins/`, and `lua/autocmds.lua`. Plugin specs are split into one file per feature under `lua/plugins/` such as `lsp-config.lua`, `treesitter.lua`, `snacks.lua`, and `theme.lua`. Post-load tweaks that rely on plugin runtime state belong in `after/plugin/`, which currently contains `after/plugin/transparency.lua`. Disabled or experimental modules are kept alongside active ones with a `.disabled` suffix instead of being deleted.
 
 ## Build, Test, and Development Commands
 Use Neovim itself as the runtime and validation target.
 
 - `nvim` launches the config locally for interactive testing.
+- `nvim --headless "+qa"` performs a minimal startup smoke test.
 - `nvim --headless "+Lazy! sync" +qa` installs or updates plugins declared through `lazy.nvim`.
 - `nvim --headless "+checkhealth" +qa` runs Neovim health checks for providers and plugin dependencies.
 - `nvim --headless "+lua require('lazy').load({plugins={'nvim-lspconfig'}})" +qa` is a useful pattern for smoke-testing a changed plugin spec.
 
-When editing a single Lua file from inside Neovim, `<leader>o` writes and re-sources the current buffer.
+On a fresh machine, first launch may clone `lazy.nvim` automatically, so `git` access is part of bootstrap.
 
 ## Coding Style & Naming Conventions
-Follow the existing Lua style: small focused modules, `return { ... }` for plugin specs, and descriptive lowercase file names with hyphens or underscores matching the feature name. Existing files mostly use 4-space indentation; keep that convention in new code even if older files contain tabs. Prefer direct `vim.opt`, `vim.api.nvim_create_autocmd`, and `vim.keymap.set` usage over custom wrappers. Keep comments short and only where the behavior is non-obvious.
+Follow the existing Lua style: small focused modules, `return { ... }` for plugin specs, and descriptive lowercase file names with hyphens or underscores matching the feature name. Use 4-space indentation. Prefer direct `vim.opt`, `vim.api.nvim_create_autocmd`, and `vim.keymap.set` usage over custom wrappers. Keep comments short and only where the behavior is non-obvious. If you are disabling a module temporarily, prefer renaming it with `.disabled` to preserve local history and intent.
 
 ## Testing Guidelines
-There is no dedicated automated test suite in this repo. Validate changes with headless startup checks and one manual interactive pass in `nvim`, focused on the feature you touched. For LSP or UI changes, confirm the affected filetype or plugin loads without errors. Treat a clean `checkhealth` and startup as the minimum bar before submitting.
+There is no dedicated automated test suite in this repo. Validate changes with at least a headless startup check and one manual interactive pass in `nvim`, focused on the feature you touched. For plugin spec changes, ensure `Lazy` can load the affected plugin without errors. For LSP or filetype-specific changes, open a matching buffer and confirm the relevant integration attaches cleanly. Treat a clean startup as the minimum bar; run `checkhealth` when the change touches providers, toolchains, or UI integrations.
 
 ## Commit & Pull Request Guidelines
-Recent commits use short, lowercase summaries such as `clamshell mode changes` and sometimes a scope prefix like `opencode:`. Keep commit messages concise, imperative, and scoped to one change. Pull requests should describe the user-visible behavior change, list any required external tools or plugins, and include screenshots or short recordings for visible UI updates such as theme, statusline, or explorer changes.
+Recent commits use short, lowercase summaries such as `clamshell mode changes` and sometimes a scope prefix like `opencode:`. Keep commit messages concise, imperative, and scoped to one change. Pull requests should describe the user-visible behavior change, list any required external tools or plugins, and include screenshots or short recordings for visible UI updates such as colorscheme, statusline, or picker/explorer behavior.

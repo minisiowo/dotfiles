@@ -1,10 +1,10 @@
 -- for java jdtls setup
-vim.api.nvim_create_autocmd('FileType', {
-    pattern = 'java',
-    callback = function(args)
-        require("jdtls.jdtls_setup").setup()
-    end
-})
+-- vim.api.nvim_create_autocmd('FileType', {
+--     pattern = 'java',
+--     callback = function(args)
+--         require("jdtls.jdtls_setup").setup()
+--     end
+-- })
 
 -- auto resize splits when the terminal's window is resized
 vim.api.nvim_create_autocmd("VimResized", {
