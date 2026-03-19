@@ -10,6 +10,7 @@ return {
                 { "<leader>g", group = "Goto" },
                 { "<leader>l", group = "LSP" },
                 { "<leader>n", group = "Notifications" },
+                { "<leader>s", group = "Split" },
                 { "<leader>t", group = "Terminal" },
                 { "<leader>v", group = "Visual" },
             },
