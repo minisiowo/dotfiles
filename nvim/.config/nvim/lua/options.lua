@@ -43,6 +43,10 @@ vim.diagnostic.config({
     virtual_lines = {current_line = true},
 })
 
+vim.keymap.set("n", "<leader>dd", vim.diagnostic.open_float, { desc = "Show diagnostic float" })
+vim.keymap.set("n", "<leader>dl", vim.diagnostic.setloclist, { desc = "Diagnostics to location list" })
+vim.keymap.set("n", "<leader>dq", vim.diagnostic.setqflist, { desc = "Diagnostics to quickfix list" })
+
 vim.opt.fillchars:append({ eob = " " })
 
 -- Update and source current file

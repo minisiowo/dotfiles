@@ -39,7 +39,7 @@ return {
         config = function()
             local util = require("lspconfig.util")
 
-            vim.lsp.set_log_level("error")
+            vim.lsp.log.set_level("error")
             vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Hover" })
             vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, { desc = "Go to definition" })
             vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, { desc = "Show references" })
