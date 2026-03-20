@@ -123,6 +123,9 @@ nvim --headless "+checkhealth" +qa
 - `<S-Up>` - scroll dokumentacji completion w gore
 - `<S-Down>` - scroll dokumentacji completion w dol
 - `<C-k>` - pokazanie lub ukrycie signature help
+- `<Tab>` - przejscie do nastepnego placeholdera snippetu
+- `<S-Tab>` - powrot do poprzedniego placeholdera snippetu
+- snippety sa rozwijane przez `LuaSnip`, a nie przez built-in `vim.snippet`
 
 Diagnostyka problemow z plain CSS completion:
 
