@@ -117,6 +117,23 @@ nvim --headless "+checkhealth" +qa
 - `<leader>lf` - format biezacego pliku
 - `<leader>ll` - lint dla aktualnego pliku, a dla Rust `cargo clippy`
 
+### Diagnostyka i nawigacja po bledach
+
+- `]d` - nastepna diagnostyka
+- `[d` - poprzednia diagnostyka
+- `]e` / `[e` - przechodzenie tylko po errorach
+- `]w` / `[w` - przechodzenie tylko po warningach
+- aktualna linia pokazuje tresc diagnostyki inline dzieki `virtual_lines`
+
+Praktyczny workflow:
+
+- `]d` / `[d` kiedy chcesz szybko przejsc po problemach w aktualnym pliku
+- `K` kiedy chcesz od razu sprawdzic typ, dokumentacje albo szczegoly symbolu pod kursorem
+- `<leader>gd` kiedy chcesz wejsc do implementacji
+- `<leader>gr` kiedy chcesz zobaczyc wszystkie uzycia symbolu
+- `<leader>ca` kiedy LSP podpowiada szybka poprawke
+- `<leader>fg` kiedy chcesz znalezc cos szerzej w projekcie, a nie tylko przez LSP
+
 ### Workflow Rust / Tauri / frontend
 
 - `<leader>tc` - `cargo check`

@@ -51,8 +51,11 @@ local function open_terminal(cmd, cwd, title)
 
     vim.cmd("botright split")
     vim.cmd("resize 14")
-    local chan = vim.fn.termopen(cmd, { cwd = cwd })
-    if not chan then
+    local chan = vim.fn.jobstart(cmd, {
+        cwd = cwd,
+        term = true,
+    })
+    if chan <= 0 then
         notify("Could not open terminal job", vim.log.levels.ERROR)
         return
     end
