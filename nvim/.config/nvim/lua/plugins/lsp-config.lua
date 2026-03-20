@@ -90,7 +90,12 @@ return {
             })
 
             vim.lsp.config("cssls", {
-                root_dir = util.root_pattern("package.json", ".git"),
+                single_file_support = true,
+                settings = {
+                    css = { validate = true },
+                    scss = { validate = true },
+                    less = { validate = true },
+                },
             })
 
             vim.lsp.config("emmet_language_server", {
