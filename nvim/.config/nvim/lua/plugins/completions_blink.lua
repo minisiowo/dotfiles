@@ -2,7 +2,16 @@ return {
     {   -- completions
         "saghen/blink.cmp",
         -- optional: provides snippets for the snippet source
-        dependencies = { "rafamadriz/friendly-snippets" },
+        dependencies = {
+            {
+                "L3MON4D3/LuaSnip",
+                version = "v2.*",
+                dependencies = { "rafamadriz/friendly-snippets" },
+                config = function()
+                    require("luasnip.loaders.from_vscode").lazy_load()
+                end,
+            },
+        },
         version = "1.*",
 
         opts = {
@@ -17,6 +26,7 @@ return {
                 nerd_font_variant = "mono"
             },
             completion = { documentation = { auto_show = false } }, -- zmien na true, jeśli okno dokumentacji ma się pojawiać automatycznie
+            snippets = { preset = "luasnip" },
             sources = {
                 default = { "lazydev", "lsp", "path", "snippets", "buffer" },
                 providers = {
