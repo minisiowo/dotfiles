@@ -6,7 +6,13 @@ return {
         version = "1.*",
 
         opts = {
-            keymap = { preset = "default" }, -- "default" "super-tab", "enter" lub "none"
+            keymap = {
+                preset = "default",
+                ["<C-b>"] = false,
+                ["<C-f>"] = false,
+                ["<S-Up>"] = { "scroll_documentation_up", "fallback" },
+                ["<S-Down>"] = { "scroll_documentation_down", "fallback" },
+            }, -- "default" "super-tab", "enter" lub "none"
             appearance = {
                 nerd_font_variant = "mono"
             },

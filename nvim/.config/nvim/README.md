@@ -117,6 +117,19 @@ nvim --headless "+checkhealth" +qa
 - `<leader>lf` - format biezacego pliku
 - `<leader>ll` - lint dla aktualnego pliku, a dla Rust `cargo clippy`
 
+### Completion / blink.cmp
+
+- `<C-Space>` - pokazanie listy podpowiedzi oraz reczne pokazanie lub ukrycie dokumentacji zaznaczonej pozycji
+- `<S-Up>` - scroll dokumentacji completion w gore
+- `<S-Down>` - scroll dokumentacji completion w dol
+- `<C-k>` - pokazanie lub ukrycie signature help
+
+Diagnostyka problemow z plain CSS completion:
+
+- `:LspInfo` - sprawdz, czy `cssls` jest podpiety do aktualnego bufora
+- `:set filetype?` - sprawdz, czy bufor ma poprawny `filetype`, np. `css`, `scss` albo `less`
+- plain CSS podpowiedzi sa dostarczane przez `cssls`, a nie przez osobny plugin do CSS
+
 ### Diagnostyka i nawigacja po bledach
 
 - `]d` - nastepna diagnostyka
