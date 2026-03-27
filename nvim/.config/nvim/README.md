@@ -22,11 +22,15 @@ Narzedzia instalowane przez `mason.nvim`:
 
 - `lua-language-server`
 - `json-lsp`
+- `yaml-language-server`
 - `rust-analyzer`
 - `typescript-language-server`
 - `html-lsp`
 - `css-lsp`
 - `emmet-language-server`
+- `pyright`
+- `ruff`
+- `dockerfile-language-server`
 - `tinymist`
 - `roslyn`
 - `prettierd`
@@ -133,6 +137,21 @@ Diagnostyka problemow z plain CSS completion:
 - `:set filetype?` - sprawdz, czy bufor ma poprawny `filetype`, np. `css`, `scss` albo `less`
 - plain CSS podpowiedzi sa dostarczane przez `cssls`, a nie przez osobny plugin do CSS
 
+### Python
+
+- `pyright` odpowiada za typy, definicje i referencje
+- `ruff server` dostarcza diagnostyke i code actions
+- `<leader>lf` formatuje przez `ruff format`
+- `<leader>ll` uruchamia `ruff`
+- Python dziala tez dla pojedynczego pliku poza pelnym projektem, nie tylko w katalogu z `pyproject.toml`
+
+### Docker / Compose
+
+- `Dockerfile` jest obslugiwany przez `dockerls`
+- `docker-compose.yml`, `docker-compose.yaml`, `compose.yml` i `compose.yaml` dostaja walidacje przez `yamlls`
+- pliki Compose korzystaja z oficjalnego schematu Compose
+- `<leader>lf` formatuje YAML przez `prettierd` albo `prettier`
+
 ### Diagnostyka i nawigacja po bledach
 
 - `]d` - nastepna diagnostyka
@@ -175,9 +194,9 @@ Praktyczny workflow:
 
 ## Co jest gdzie
 
-- `lua/plugins/lsp-config.lua` - Mason oraz konfiguracja LSP dla Lua, JSON, Rust, JS, HTML, CSS i Emmeta
-- `lua/plugins/formatting.lua` - reczne formatowanie i linting
-- `lua/plugins/treesitter.lua` - parsery Treesitter i textobjects
+- `lua/plugins/lsp-config.lua` - Mason oraz konfiguracja LSP dla Lua, JSON, YAML, Python, Rust, JS, HTML, CSS, Dockera i Emmeta
+- `lua/plugins/formatting.lua` - reczne formatowanie i linting, w tym Ruff dla Pythona
+- `lua/plugins/treesitter.lua` - parsery Treesitter i textobjects, takze dla Pythona, Dockera i YAML
 - `lua/options.lua` - podstawowe opcje, mapy buforow, splitow i nawigacji okien
 - `lua/project_workflow.lua` - wykrywanie roota projektu i komendy terminalowe dla Rust/Tauri/Vite
 - `after/plugin/project_workflow.lua` - keymapy do formatowania, lintingu i taskow projektowych

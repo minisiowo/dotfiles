@@ -9,7 +9,9 @@ return {
                 html = { "prettierd", "prettier" },
                 javascript = { "prettierd", "prettier" },
                 json = { "prettierd", "prettier" },
+                python = { "ruff_format" },
                 rust = { "rustfmt" },
+                yaml = { "prettierd", "prettier", stop_after_first = true },
             },
         },
         config = function(_, opts)
@@ -25,6 +27,7 @@ return {
             lint.linters_by_ft = {
                 javascript = { "eslint_d" },
                 javascriptreact = { "eslint_d" },
+                python = { "ruff" },
             }
         end,
     },

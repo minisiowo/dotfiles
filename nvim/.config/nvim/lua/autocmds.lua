@@ -15,6 +15,12 @@ vim.filetype.add({
     extension = {
         axaml = "xml",
     },
+    filename = {
+        ["compose.yaml"] = "yaml",
+        ["compose.yml"] = "yaml",
+        ["docker-compose.yaml"] = "yaml",
+        ["docker-compose.yml"] = "yaml",
+    },
 })
 
 -- no auto continue comments on new line
