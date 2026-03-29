@@ -16,6 +16,7 @@ return {
         opts = {
             -- tutaj nazwy z Mason'a, a nie nazwy LSP
             ensure_installed = {
+                "bash-language-server", -- LSP: bashls
                 "css-lsp",             -- LSP: cssls
                 "dockerfile-language-server", -- LSP: dockerls
                 "emmet-language-server", -- LSP: emmet_language_server
@@ -27,6 +28,8 @@ return {
                 "roslyn",              -- LSP: roslyn (via roslyn.nvim)
                 "ruff",                -- LSP/lint/format: ruff
                 "rust-analyzer",       -- LSP: rust_analyzer
+                "shellcheck",          -- lint: shellcheck
+                "shfmt",               -- formatter: shfmt
                 "tinymist",            -- LSP: tinymist
                 "typescript-language-server", -- LSP: ts_ls
                 "lua-language-server", -- LSP: lua_ls
@@ -64,6 +67,12 @@ return {
                 },
             })
 
+            vim.lsp.config("bashls", {
+                capabilities = capabilities,
+                filetypes = { "sh", "bash" },
+                single_file_support = true,
+            })
+
             vim.lsp.config("lua_ls", {
                 capabilities = capabilities,
                 settings = {
@@ -80,6 +89,7 @@ return {
 
             vim.lsp.config("jsonls", {
                 capabilities = capabilities,
+                filetypes = { "json", "jsonc" },
             })
 
             vim.lsp.config("pyright", {
@@ -136,17 +146,29 @@ return {
 
             vim.lsp.config("ts_ls", {
                 capabilities = capabilities,
+                filetypes = {
+                    "javascript",
+                    "javascriptreact",
+                    "javascript.jsx",
+                    "typescript",
+                    "typescriptreact",
+                    "typescript.tsx",
+                },
                 root_dir = util.root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git"),
                 single_file_support = true,
             })
 
             vim.lsp.config("html", {
                 capabilities = capabilities,
+                filetypes = { "html" },
                 root_dir = util.root_pattern("package.json", ".git"),
+                single_file_support = true,
             })
 
             vim.lsp.config("cssls", {
                 capabilities = capabilities,
+                filetypes = { "css", "scss", "less" },
+                root_dir = util.root_pattern("package.json", ".git"),
                 single_file_support = true,
                 settings = {
                     css = { validate = true },
@@ -158,6 +180,7 @@ return {
             vim.lsp.config("emmet_language_server", {
                 capabilities = capabilities,
                 root_dir = util.root_pattern("package.json", ".git"),
+                single_file_support = true,
                 filetypes = {
                     "css",
                     "eruby",
@@ -173,10 +196,12 @@ return {
 
             vim.lsp.config("dockerls", {
                 capabilities = capabilities,
+                filetypes = { "dockerfile" },
             })
 
             vim.lsp.config("yamlls", {
                 capabilities = capabilities,
+                filetypes = { "yaml" },
                 settings = {
                     redhat = {
                         telemetry = {
@@ -207,6 +232,7 @@ return {
 
             -- tutaj nazwy LSP, nie nazwy z MASON'A (od neovim 11+)
             vim.lsp.enable({
+                "bashls",
                 "cssls",
                 "dockerls",
                 "emmet_language_server",
@@ -219,6 +245,76 @@ return {
                 "tinymist",
                 "ts_ls",
                 "yamlls",
+            })
+
+            local lsp_attach_group = vim.api.nvim_create_augroup("manual_web_lsp_attach", { clear = true })
+
+            local function attach_lsp(name, bufnr)
+                for _, client in ipairs(vim.lsp.get_clients({ bufnr = bufnr })) do
+                    if client.name == name then
+                        return
+                    end
+                end
+
+                vim.lsp.start(vim.lsp.config[name], { bufnr = bufnr })
+            end
+
+            vim.api.nvim_create_autocmd("FileType", {
+                group = lsp_attach_group,
+                pattern = "html",
+                callback = function(args)
+                    attach_lsp("html", args.buf)
+                    attach_lsp("emmet_language_server", args.buf)
+                end,
+            })
+
+            vim.api.nvim_create_autocmd("FileType", {
+                group = lsp_attach_group,
+                pattern = { "css", "scss", "less" },
+                callback = function(args)
+                    attach_lsp("cssls", args.buf)
+                    attach_lsp("emmet_language_server", args.buf)
+                end,
+            })
+
+            vim.api.nvim_create_autocmd("FileType", {
+                group = lsp_attach_group,
+                pattern = {
+                    "javascript",
+                    "javascriptreact",
+                    "javascript.jsx",
+                    "typescript",
+                    "typescriptreact",
+                    "typescript.tsx",
+                },
+                callback = function(args)
+                    attach_lsp("ts_ls", args.buf)
+                    attach_lsp("emmet_language_server", args.buf)
+                end,
+            })
+
+            vim.api.nvim_create_autocmd("FileType", {
+                group = lsp_attach_group,
+                pattern = { "json", "jsonc" },
+                callback = function(args)
+                    attach_lsp("jsonls", args.buf)
+                end,
+            })
+
+            vim.api.nvim_create_autocmd("FileType", {
+                group = lsp_attach_group,
+                pattern = "yaml",
+                callback = function(args)
+                    attach_lsp("yamlls", args.buf)
+                end,
+            })
+
+            vim.api.nvim_create_autocmd("FileType", {
+                group = lsp_attach_group,
+                pattern = "dockerfile",
+                callback = function(args)
+                    attach_lsp("dockerls", args.buf)
+                end,
             })
         end
     },
