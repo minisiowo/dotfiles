@@ -102,29 +102,33 @@ set_workspace_bindings() {
 sync_waybar() {
   local mode="$1"
   local external_display="${2:-}"
+  local restart_mode="${3:-always}"
 
-  "$WAYBAR_APPLY_SCRIPT" "$mode" "$external_display" 9>&-
+  "$WAYBAR_APPLY_SCRIPT" "$mode" "$external_display" "$restart_mode" 9>&-
 }
 
 apply_single_mode() {
   local target_monitor="$1"
+  local restart_mode="${2:-always}"
 
   set_workspace_bindings "$target_monitor" "${WORKSPACES_ALL[@]}"
   move_workspaces_to_monitor "$target_monitor" "${WORKSPACES_ALL[@]}"
-  sync_waybar single
+  sync_waybar single "" "$restart_mode"
 }
 
 apply_dual_mode() {
   local external_display="$1"
+  local restart_mode="${2:-always}"
 
   set_workspace_bindings "$INTERNAL_DISPLAY" "${WORKSPACES_LAPTOP[@]}"
   set_workspace_bindings "$external_display" "${WORKSPACES_EXTERNAL[@]}"
   move_workspaces_to_monitor "$INTERNAL_DISPLAY" "${WORKSPACES_LAPTOP[@]}"
   move_workspaces_to_monitor "$external_display" "${WORKSPACES_EXTERNAL[@]}"
-  sync_waybar dual "$external_display"
+  sync_waybar dual "$external_display" "$restart_mode"
 }
 
 sync_current_layout() {
+  local restart_mode="${1:-always}"
   local external_display
   external_display="$(get_external_display)"
 
@@ -134,15 +138,15 @@ sync_current_layout() {
 
     external_display="$(get_external_display)"
     if [[ -n "$external_display" ]]; then
-      apply_dual_mode "$external_display"
+      apply_dual_mode "$external_display" "$restart_mode"
     else
-      apply_single_mode "$INTERNAL_DISPLAY"
+      apply_single_mode "$INTERNAL_DISPLAY" "$restart_mode"
     fi
     return
   fi
 
   if [[ -n "$external_display" ]]; then
-    apply_single_mode "$external_display"
+    apply_single_mode "$external_display" "$restart_mode"
     disable_internal_display
     sleep 1
     return
@@ -150,7 +154,7 @@ sync_current_layout() {
 
   enable_internal_display
   sleep 1
-  apply_single_mode "$INTERNAL_DISPLAY"
+  apply_single_mode "$INTERNAL_DISPLAY" "$restart_mode"
 }
 
 mode_close() {
@@ -199,8 +203,11 @@ case "$ACTION" in
   check)
     sync_current_layout
     ;;
+  startup-check)
+    sync_current_layout if-changed
+    ;;
   *)
-    echo "Usage: $0 [open|close|check]"
+    echo "Usage: $0 [open|close|check|startup-check]"
     exit 1
     ;;
 esac

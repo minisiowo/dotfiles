@@ -4,6 +4,7 @@ set -euo pipefail
 
 MODE="${1:-single}"
 EXTERNAL_DISPLAY="${2:-}"
+RESTART_MODE="${3:-always}"
 
 SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 CONFIG_DIR="$(cd -- "$SCRIPT_DIR/.." && pwd)"
@@ -26,6 +27,11 @@ fi
 
 if [[ "$MODE" == "dual" && -z "$EXTERNAL_DISPLAY" ]]; then
   echo "Dual mode requires external display name" >&2
+  exit 1
+fi
+
+if [[ "$RESTART_MODE" != "always" && "$RESTART_MODE" != "if-changed" ]]; then
+  echo "Restart mode must be 'always' or 'if-changed'" >&2
   exit 1
 fi
 
@@ -162,7 +168,18 @@ jq \
     end
   ' "$DEFAULT_CONFIG" > "$TEMP_FILE"
 
+if [[ -f "$CONFIG_FILE_OUT" ]] && cmp -s "$TEMP_FILE" "$CONFIG_FILE_OUT"; then
+  install -D -m 644 "$TEMP_FILE" "$DOTFILES_CONFIG_FILE"
+  rm -f "$TEMP_FILE"
+  exit 0
+fi
+
 install -m 600 "$TEMP_FILE" "$CONFIG_FILE_OUT"
 install -D -m 644 "$TEMP_FILE" "$DOTFILES_CONFIG_FILE"
 rm -f "$TEMP_FILE"
-omarchy-restart-waybar
+
+if [[ "$RESTART_MODE" == "always" || ! -f "$CONFIG_FILE_OUT" ]]; then
+  omarchy-restart-waybar
+else
+  omarchy-restart-waybar
+fi

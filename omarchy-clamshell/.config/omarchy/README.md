@@ -43,10 +43,15 @@ When only one display is active, the active display gets the full workspace rang
 - The listener reacts only to `monitoraddedv2` and `monitorremovedv2`.
 - Hotplug events are briefly suppressed after explicit lid actions to avoid duplicate Waybar restarts.
 - Background `check` runs are skipped if another clamshell action is already in progress.
+- Startup uses `startup-check`, which only restarts Waybar when the generated config actually changes.
 
 ## Runtime Integration
 
 The scripts live in dotfiles, but runtime paths should always use `~/.config/omarchy/...`.
+
+Dotfiles package path for this project:
+
+- `~/dotfiles/omarchy-clamshell`
 
 Expected runtime paths after stow:
 
@@ -91,6 +96,7 @@ Only `INTERNAL_DISPLAY` is usually device-specific.
 
 ```bash
 ~/.config/omarchy/scripts/clamshell.sh check
+~/.config/omarchy/scripts/clamshell.sh startup-check
 ~/.config/omarchy/scripts/clamshell.sh open
 ~/.config/omarchy/scripts/clamshell.sh close
 ```
