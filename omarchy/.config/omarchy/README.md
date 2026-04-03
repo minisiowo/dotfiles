@@ -22,6 +22,9 @@ Small Omarchy/Hyprland clamshell project for dynamic monitor and workspace routi
 - Default setup in this repo:
   - laptop: `1-4`
   - external: `5-8`
+- Extra dynamic workspaces can stay outside the main split.
+- Default extra dynamic workspace in this repo:
+  - `10` for Telegram
 
 When only one display is active, the active display gets the full workspace range.
 
@@ -76,6 +79,7 @@ Example `clamshell.conf`:
 INTERNAL_DISPLAY="eDP-1"
 LAPTOP_WORKSPACE_COUNT=4
 EXTERNAL_WORKSPACE_COUNT=4
+EXTRA_DYNAMIC_WORKSPACES="10"
 
 ICON_LAPTOP="computer-laptop"
 ICON_MONITOR="video-display"
@@ -112,3 +116,4 @@ If the bar looks wrong, run:
 - One internal display.
 - Zero or one external display is treated as the main external target.
 - Workspace display in Waybar depends on dynamic Hyprland workspace bindings set by `clamshell.sh`.
+- Extra dynamic workspaces such as Telegram on `10` are visible when active, but are not part of the persistent `1-8` split.

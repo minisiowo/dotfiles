@@ -10,6 +10,7 @@ CONFIG_DIR="$(cd -- "$SCRIPT_DIR/.." && pwd)"
 CONFIG_FILE="$CONFIG_DIR/clamshell.conf"
 
 CONFIG_FILE_OUT="$HOME/.config/waybar/config.jsonc"
+DOTFILES_CONFIG_FILE="$HOME/dotfiles/waybar/.config/waybar/config.jsonc"
 DEFAULT_CONFIG="$HOME/.local/share/omarchy/config/waybar/config.jsonc"
 TEMP_FILE="$(mktemp)"
 
@@ -49,21 +50,36 @@ build_ignore_regex() {
   local count="$2"
   local values=()
   local visible=()
+  local extras=()
   local workspace
 
   for ((workspace = start; workspace < start + count; workspace++)); do
     visible+=("$workspace")
   done
 
+  if [[ -n "${EXTRA_DYNAMIC_WORKSPACES:-}" ]]; then
+    read -r -a extras <<< "$EXTRA_DYNAMIC_WORKSPACES"
+  fi
+
   for workspace in {1..10}; do
     local keep=false
     local current
+
     for current in "${visible[@]}"; do
       if [[ "$workspace" -eq "$current" ]]; then
         keep=true
         break
       fi
     done
+
+    if [[ "$keep" == false ]]; then
+      for current in "${extras[@]}"; do
+        if [[ "$workspace" -eq "$current" ]]; then
+          keep=true
+          break
+        fi
+      done
+    fi
 
     if [[ "$keep" == false ]]; then
       values+=("$workspace")
@@ -147,5 +163,6 @@ jq \
   ' "$DEFAULT_CONFIG" > "$TEMP_FILE"
 
 install -m 600 "$TEMP_FILE" "$CONFIG_FILE_OUT"
+install -D -m 644 "$TEMP_FILE" "$DOTFILES_CONFIG_FILE"
 rm -f "$TEMP_FILE"
 omarchy-restart-waybar
