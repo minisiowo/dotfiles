@@ -7,8 +7,8 @@ EXTERNAL_DISPLAY="${2:-}"
 RESTART_MODE="${3:-always}"
 
 SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
-CONFIG_DIR="$(cd -- "$SCRIPT_DIR/.." && pwd)"
-CONFIG_FILE="$CONFIG_DIR/clamshell.conf"
+PROJECT_DIR="$(cd -- "$SCRIPT_DIR/.." && pwd)"
+CONFIG_FILE="$PROJECT_DIR/clamshell.conf"
 
 CONFIG_FILE_OUT="$HOME/.config/waybar/config.jsonc"
 DOTFILES_CONFIG_FILE="$HOME/dotfiles/waybar/.config/waybar/config.jsonc"

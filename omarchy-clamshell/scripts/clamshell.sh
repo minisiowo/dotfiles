@@ -3,8 +3,8 @@
 set -euo pipefail
 
 SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
-CONFIG_DIR="$(cd -- "$SCRIPT_DIR/.." && pwd)"
-CONFIG_FILE="$CONFIG_DIR/clamshell.conf"
+PROJECT_DIR="$(cd -- "$SCRIPT_DIR/.." && pwd)"
+CONFIG_FILE="$PROJECT_DIR/clamshell.conf"
 WAYBAR_APPLY_SCRIPT="$SCRIPT_DIR/apply-waybar-layout.sh"
 RUNTIME_DIR="${XDG_RUNTIME_DIR:-/tmp}"
 LOCK_FILE="$RUNTIME_DIR/omarchy-clamshell.lock"
