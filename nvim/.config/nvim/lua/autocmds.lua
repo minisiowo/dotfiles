@@ -30,3 +30,17 @@ vim.api.nvim_create_autocmd("FileType", {
 		vim.opt_local.formatoptions:remove({ "c", "r", "o" })
 	end,
 })
+
+-- Auto save when leaving buffer, losing focus, or leaving insert mode
+vim.api.nvim_create_autocmd({"FocusLost", "BufLeave"}, {
+    group = vim.api.nvim_create_augroup("auto_save", {}),
+    callback = function()
+        -- Only save if:
+        -- 1. Buffer is modified
+        -- 2. Buffer is not read-only
+        -- 3. Buffer has a filename (not a new unnamed buffer)
+        if vim.bo.modified and not vim.bo.readonly and vim.fn.expand("%") ~= "" then
+            vim.cmd("silent write")
+        end
+    end,
+})
