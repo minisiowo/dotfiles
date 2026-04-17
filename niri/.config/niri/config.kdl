@@ -117,10 +117,11 @@ window-rule {
     open-floating true
 }
 
-window-rule {
-    match title="Firefox"
-    open-maximized true
-}
+// window-rule {
+//     match title="Firefox"
+//     match app-id=r#"zen$"#
+//     open-maximized true
+// }
 
 // Example: block out two password managers from screen capture.
 // (This example rule is commented out with a "/-" in front.)
@@ -152,8 +153,7 @@ binds {
     Mod+Alt+V repeat=false { spawn "vicinae" "vicinae://launch/clipboard/history"; }
 
     // Suggested binds for running programs: terminal, app launcher, screen locker.
-    Mod+Return hotkey-overlay-title="Open a Terminal: alacritty" { spawn "alacritty"; }
-    Mod+D hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
+    Mod+Return hotkey-overlay-title="Open a Terminal: ghostty" { spawn "ghostty"; }
     Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
 
     // Use spawn-sh to run a shell command. Do this if you need pipes, multiple commands, etc.
