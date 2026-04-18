@@ -137,9 +137,14 @@ window-rule {
 
 // Example: enable rounded corners for all windows.
 // (This example rule is commented out with a "/-" in front.)
-window-rule {
+/-window-rule {
     geometry-corner-radius 0
     clip-to-geometry true
+}
+
+window-rule {
+    match app-id=r#"^org\.telegram\.desktop$"#
+    open-floating true
 }
 
 layer-rule {
@@ -330,9 +335,10 @@ binds {
     // Mod+Space       { switch-layout "next"; }
     // Mod+Shift+Space { switch-layout "prev"; }
 
-    Print { screenshot; }
-    Ctrl+Print { screenshot-screen; }
-    Alt+Print { screenshot-window; }
+    Mod+Shift+S { spawn-sh "grim -g \"$(slurp -d)\" - | wl-copy --type image/png"; }
+    // Mod+Shift+S { screenshot; }
+    // Ctrl+Print { screenshot-screen; }
+    // Alt+Print { screenshot-window; }
 
     // Applications such as remote-desktop clients and software KVM switches may
     // request that niri stops processing the keyboard shortcuts defined here
