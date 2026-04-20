@@ -1,13 +1,14 @@
 font-family = JetBrainsMono Nerd Font Mono
-font-style = SemiBold
+# font-style = SemiBold
 # font-synthetic-style = bold
+font-size = 10
 
-theme = "Github Dark"
-background = #303030
-foreground = ffffff
+theme = Kanagawa Dragon
+background = #0d0d0d
+# foreground = ffffff
 
-window-padding-x = 4,4
-window-padding-y = 4,4
+window-padding-x = 12,12
+window-padding-y = 10,10
 
 cursor-style = block
 shell-integration-features = no-cursor
@@ -19,7 +20,7 @@ cursor-style-blink = false
 # Dostosowuje kolor do background
 # window-theme = ghostty
 
-window-theme = auto
-macos-titlebar-style = transparent
-background-opacity = 0.8
-background-blur = true
+# window-theme = dark
+# macos-titlebar-style = transparent
+# background-opacity = 0.8
+# background-blur = true
