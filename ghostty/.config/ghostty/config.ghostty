@@ -22,5 +22,5 @@ cursor-style-blink = false
 
 # window-theme = dark
 # macos-titlebar-style = transparent
-background-opacity = 0.9
-# background-blur = false
+# background-opacity = 0.9
+# background-blur = true
