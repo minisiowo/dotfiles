@@ -75,3 +75,12 @@ __pycache__/
 tmux/.config/tmux/plugins/
 
 opencode/.config/opencode/antigravity-accounts.json
+
+# Pi runtime/secrets (keep only hand-written config in pi/.pi/agent)
+pi/.pi/agent/auth.json
+pi/.pi/agent/run-history.jsonl
+pi/.pi/agent/sessions/
+pi/.pi/agent/*cache*.json
+pi/.pi/agent/git/
+pi/.pi/agent/npm/
+pi/.pi/context-mode/sessions/
