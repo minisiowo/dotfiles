@@ -34,8 +34,10 @@ let lastSnapshot: RateLimitSnapshot | undefined;
 let lastError: string | undefined;
 
 export default function (pi: ExtensionAPI) {
-	async function refresh(ctx: ExtensionContext) {
-		if (!enabled || refreshing) return;
+	let lifecycleVersion = 0;
+
+	async function refresh(ctx: ExtensionContext, version = lifecycleVersion) {
+		if (!enabled || refreshing || version !== lifecycleVersion) return;
 		if (!isOpenAIModel(ctx)) {
 			lastSnapshot = undefined;
 			lastError = undefined;
@@ -50,16 +52,20 @@ export default function (pi: ExtensionAPI) {
 			lastError = error instanceof Error ? error.message : String(error);
 		} finally {
 			refreshing = false;
-			renderStatus(ctx);
+			if (version === lifecycleVersion) {
+				renderStatus(ctx);
+			}
 		}
 	}
 
 	function start(ctx: ExtensionContext) {
+		const version = lifecycleVersion;
 		renderStatus(ctx);
-		void refresh(ctx);
+		void refresh(ctx, version);
 	}
 
 	pi.on("session_start", async (_event, ctx) => {
+		lifecycleVersion++;
 		start(ctx);
 	});
 
@@ -72,6 +78,7 @@ export default function (pi: ExtensionAPI) {
 	});
 
 	pi.on("session_shutdown", async (_event, ctx) => {
+		lifecycleVersion++;
 		ctx.ui.setStatus(STATUS_KEY, undefined);
 	});
 
@@ -91,8 +98,11 @@ export default function (pi: ExtensionAPI) {
 				ctx.ui.notify("Codex usage: enabled", "info");
 				return;
 			}
-			await refresh(ctx);
-			ctx.ui.notify(formatNotification(), lastError ? "warning" : "info");
+			const version = lifecycleVersion;
+			await refresh(ctx, version);
+			if (version === lifecycleVersion) {
+				ctx.ui.notify(formatNotification(), lastError ? "warning" : "info");
+			}
 		},
 	});
 }
