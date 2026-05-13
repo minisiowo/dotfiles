@@ -13,6 +13,7 @@ prepend_keymap = [
 	{ on = "<C-n>", run = "shell -- dragon-drop -x -i -T %h", desc = "Drag hovered file" },
 	{ on = "O", run = "open --interactive", desc = "Open with..." },
 	{ on = [ "o", "e" ], run = "open --interactive", desc = "Open with..." },
+	{ on = [ "o", "n" ], run = 'shell --orphan -- ghostty -e ${EDITOR:-nvim} %h', desc = "Open in external Neovim" },
 	{ on = [ "c", "p" ], run = "copy path", desc = "Copy path" },
 	{ on = [ "c", "d" ], run = "copy dirname", desc = "Copy dirname" },
 	{ on = [ "c", "f" ], run = "copy filename", desc = "Copy filename" },
