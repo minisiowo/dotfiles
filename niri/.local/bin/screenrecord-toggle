@@ -1,0 +1,138 @@
+#!/bin/bash
+
+[[ -f ~/.config/user-dirs.dirs ]] && source ~/.config/user-dirs.dirs
+
+OUTPUT_DIR="${SCREENRECORD_DIR:-${XDG_VIDEOS_DIR:-$HOME/Videos}}"
+RECORDING_FILE="/tmp/screenrecord-filename"
+STATE_FILE="/tmp/screenrecord-state"
+LOG_FILE="/tmp/screenrecord.log"
+DESKTOP_AUDIO="false"
+MICROPHONE_AUDIO="false"
+
+for arg in "$@"; do
+  case "$arg" in
+  --with-desktop-audio) DESKTOP_AUDIO="true" ;;
+  --with-microphone-audio) MICROPHONE_AUDIO="true" ;;
+  *)
+    notify-send "Screen recording" "Unknown option: $arg" -u critical -t 3000
+    exit 1
+    ;;
+  esac
+done
+
+mkdir -p "$OUTPUT_DIR"
+
+screenrecording_active() {
+  pgrep -f "^gpu-screen-recorder" >/dev/null
+}
+
+default_output_monitor() {
+  local sink
+  sink=$(pactl get-default-sink 2>/dev/null) || return 1
+
+  if pactl list short sources 2>/dev/null | awk '{ print $2 }' | grep -Fxq "$sink.monitor"; then
+    echo "$sink.monitor"
+  else
+    echo "default_output"
+  fi
+}
+
+default_input_source() {
+  pactl get-default-source 2>/dev/null || echo "default_input"
+}
+
+build_audio_args() {
+  local audio_devices=""
+
+  if [[ $DESKTOP_AUDIO == "true" ]]; then
+    audio_devices="$(default_output_monitor)"
+  fi
+
+  if [[ $MICROPHONE_AUDIO == "true" ]]; then
+    [[ -n $audio_devices ]] && audio_devices+="|"
+    audio_devices+="$(default_input_source)"
+  fi
+
+  [[ -n $audio_devices ]] && AUDIO_ARGS=(-a "$audio_devices" -ac aac)
+}
+
+audio_label() {
+  if [[ $DESKTOP_AUDIO == "true" && $MICROPHONE_AUDIO == "true" ]]; then
+    echo "desktop + microphone audio"
+  elif [[ $DESKTOP_AUDIO == "true" ]]; then
+    echo "desktop audio"
+  elif [[ $MICROPHONE_AUDIO == "true" ]]; then
+    echo "microphone audio"
+  else
+    echo "no audio"
+  fi
+}
+
+stop_screenrecording() {
+  pkill -SIGINT -f "^gpu-screen-recorder"
+
+  local count=0
+  while screenrecording_active && ((count < 50)); do
+    sleep 0.1
+    count=$((count + 1))
+  done
+
+  echo "inactive" >"$STATE_FILE"
+
+  if screenrecording_active; then
+    pkill -9 -f "^gpu-screen-recorder"
+    notify-send "Screen recording error" "Recording process had to be force-killed. Video may be corrupted." -u critical -t 5000
+  else
+    local filename
+    filename=$(cat "$RECORDING_FILE" 2>/dev/null)
+
+    if [[ -n $filename ]]; then
+      notify-send "Screen recording saved" "$filename" -t 5000
+      echo "$filename"
+    else
+      notify-send "Screen recording stopped" -t 3000
+    fi
+  fi
+
+  rm -f "$RECORDING_FILE"
+}
+
+start_screenrecording() {
+  local filename="$OUTPUT_DIR/screenrecording-$(date +'%Y-%m-%d_%H-%M-%S').mp4"
+  local AUDIO_ARGS=()
+
+  build_audio_args
+
+  echo "===== $(date '+%F %T') audio: ${AUDIO_ARGS[*]:-none} =====" >>"$LOG_FILE"
+
+  gpu-screen-recorder \
+    -w portal \
+    -s 0x0 \
+    -k auto \
+    -f 60 \
+    -fm cfr \
+    -fallback-cpu-encoding yes \
+    -o "$filename" \
+    "${AUDIO_ARGS[@]}" \
+    2>>"$LOG_FILE" &
+
+  local pid=$!
+
+  sleep 0.5
+
+  if kill -0 "$pid" 2>/dev/null; then
+    echo "$filename" >"$RECORDING_FILE"
+    echo "active" >"$STATE_FILE"
+    notify-send "Screen recording started" "$(audio_label). Use Alt+Print to stop." -t 3000
+  else
+    echo "inactive" >"$STATE_FILE"
+    notify-send "Screen recording failed" "See $LOG_FILE" -u critical -t 5000
+    return 1
+  fi
+}
+
+if screenrecording_active; then
+  stop_screenrecording
+else
+  start_screenrecording
+fi

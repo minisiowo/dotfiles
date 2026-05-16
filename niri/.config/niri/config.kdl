@@ -22,6 +22,7 @@ input {
         natural-scroll
         accel-speed 0.2
         scroll-method "two-finger"
+        scroll-factor 0.4
     }
 
     mouse {
@@ -35,7 +36,7 @@ input {
 
     // Uncomment this to make the mouse warp to the center of newly focused windows.
     // warp-mouse-to-focus
-    focus-follows-mouse
+    // focus-follows-mouse
 }
 
 output "eDP-1" {
@@ -45,19 +46,31 @@ output "eDP-1" {
     position x=0 y=0
 }
 
-output "DP-1" {
+output "DP-2" {
     mode "2560x1440@74.780"
     scale 1
     transform "normal"
     position x=1920 y=0
 }
 
-output "DP-2" {
-    mode "1920x1280@60.000"
-    scale 1.3
+output "DP-9" {
+    mode "2560x1440@74.780"
+    scale 1
     transform "normal"
-    position x=4480 y=0
+    position x=1920 y=0
 }
+
+output "DP-7" {
+    mode "1920x1080@100"
+    scale 1
+}
+
+// output "DP-2" {
+//     mode "1920x1280@60.000"
+//     scale 1.3
+//     transform "normal"
+//     position x=4480 y=0
+// }
 
 layout {
     gaps 5
@@ -128,13 +141,16 @@ window-rule {
     // - Flatpak Firefox (app-id is "org.mozilla.firefox")
     match app-id=r#"firefox$"# title="^Picture-in-Picture$"
     match app-id=r#"zen$"# title="^Picture-in-Picture$"
+    match title="^Picture in picture$"
     open-floating true
+    default-floating-position x=32 y=32 relative-to="bottom-right"
 }
 
-window-rule {
-    match app-id=r#"^zen$"# title=r#"Bitwarden/i"#
-    default-column-width { fixed 634; }
-}
+// niestety nie działa bo initial title jest nie takie jakie być powinno
+// window-rule {
+//     match app-id=r#"^zen$"# title=r#"(?i)Bitwarden"#
+//     default-column-width { fixed 634; }
+// }
 
 // window-rule {
 //     match title="Firefox"
@@ -164,6 +180,7 @@ window-rule {
 window-rule {
     match app-id=r#"^org\.telegram\.desktop$"#
     open-floating true
+    // default-column-width { fixed 634; }
 }
 
 layer-rule {
@@ -265,20 +282,24 @@ binds {
     Mod+Shift+U         { move-workspace-down; }
     Mod+Shift+I         { move-workspace-up; }
 
-    Mod+WheelScrollDown      cooldown-ms=150 { focus-workspace-down; }
-    Mod+WheelScrollUp        cooldown-ms=150 { focus-workspace-up; }
-    Mod+Ctrl+WheelScrollDown cooldown-ms=150 { move-column-to-workspace-down; }
-    Mod+Ctrl+WheelScrollUp   cooldown-ms=150 { move-column-to-workspace-up; }
+    Mod+WheelScrollDown      cooldown-ms=150 { focus-column-right; }
+    Mod+WheelScrollUp        cooldown-ms=150 { focus-column-left; }
+    Mod+Ctrl+WheelScrollDown cooldown-ms=150 { focus-workspace-down; }
+    Mod+Ctrl+WheelScrollUp   cooldown-ms=150 { focus-workspace-up; }
 
-    Mod+WheelScrollRight      { focus-column-right; }
-    Mod+WheelScrollLeft       { focus-column-left; }
-    Mod+Ctrl+WheelScrollRight { move-column-right; }
-    Mod+Ctrl+WheelScrollLeft  { move-column-left; }
+    Mod+WheelScrollRight            { focus-column-right; }
+    Mod+WheelScrollLeft             { focus-column-left; }
+    Mod+Shift+WheelScrollRight      { move-column-right; }
+    Mod+Shift+WheelScrollLeft       { move-column-left; }
+    Mod+Ctrl+WheelScrollRight       { focus-monitor-right; }
+    Mod+Ctrl+WheelScrollLeft        { focus-monitor-left; }
+    Mod+Ctrl+Shift+WheelScrollRight { move-column-to-monitor-right; }
+    Mod+Ctrl+Shift+WheelScrollLeft  { move-column-to-monitor-left; }
 
-    Mod+Shift+WheelScrollDown      { focus-column-right; }
-    Mod+Shift+WheelScrollUp        { focus-column-left; }
-    Mod+Ctrl+Shift+WheelScrollDown { move-column-right; }
-    Mod+Ctrl+Shift+WheelScrollUp   { move-column-left; }
+    Mod+Shift+WheelScrollDown      cooldown-ms=150 { move-column-right; }
+    Mod+Shift+WheelScrollUp        cooldown-ms=150 { move-column-left; }
+    Mod+Ctrl+Shift+WheelScrollDown cooldown-ms=150 { move-column-to-workspace-down; }
+    Mod+Ctrl+Shift+WheelScrollUp   cooldown-ms=150 { move-column-to-workspace-up; }
 
     Mod+1 { focus-workspace 1; }
     Mod+2 { focus-workspace 2; }
@@ -355,6 +376,10 @@ binds {
     // Mod+Shift+Space { switch-layout "prev"; }
 
     Mod+Shift+S { spawn-sh "grim -g \"$(slurp -d)\" - | wl-copy --type image/png"; }
+    Alt+Print repeat=false { spawn "/home/minis/.local/bin/screenrecord-toggle"; }
+    Ctrl+Alt+Print repeat=false { spawn "/home/minis/.local/bin/screenrecord-toggle" "--with-desktop-audio"; }
+    Shift+Alt+Print repeat=false { spawn "/home/minis/.local/bin/screenrecord-toggle" "--with-desktop-audio" "--with-microphone-audio"; }
+    Mod+Shift+C { spawn-sh "hyprpicker -a"; }
     // Mod+Shift+S { screenshot; }
     // Ctrl+Print { screenshot-screen; }
     // Alt+Print { screenshot-window; }
@@ -381,3 +406,6 @@ binds {
 environment {
     QT_QPA_PLATFORMTHEME "qt6ct"
 }
+
+include "./noctalia.kdl"
+
