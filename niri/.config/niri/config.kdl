@@ -36,7 +36,8 @@ input {
 
     // Uncomment this to make the mouse warp to the center of newly focused windows.
     // warp-mouse-to-focus
-    // focus-follows-mouse
+    // Nie pozwalaj focus-follows-mouse przewijać layoutu przy zmianie fokusu.
+    focus-follows-mouse max-scroll-amount="10%"
 }
 
 output "eDP-1" {
@@ -195,6 +196,7 @@ binds {
 
     // Suggested binds for running programs: terminal, app launcher, screen locker.
     Mod+Return hotkey-overlay-title="Open a Terminal: ghostty" { spawn "ghostty"; }
+    Super+Shift+B hotkey-overlay-title="Open Brave Browser" { spawn "brave-origin-beta"; }
     Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
 
     // Use spawn-sh to run a shell command. Do this if you need pipes, multiple commands, etc.
@@ -376,9 +378,9 @@ binds {
     // Mod+Shift+Space { switch-layout "prev"; }
 
     Mod+Shift+S { spawn-sh "grim -g \"$(slurp -d)\" - | wl-copy --type image/png"; }
-    Alt+Print repeat=false { spawn "/home/minis/.local/bin/screenrecord-toggle"; }
-    Ctrl+Alt+Print repeat=false { spawn "/home/minis/.local/bin/screenrecord-toggle" "--with-desktop-audio"; }
-    Shift+Alt+Print repeat=false { spawn "/home/minis/.local/bin/screenrecord-toggle" "--with-desktop-audio" "--with-microphone-audio"; }
+    Alt+Print repeat=false hotkey-overlay-title="Toggle screen recording" { spawn "/home/minis/.local/bin/screenrecord-toggle"; }
+    Ctrl+Alt+Print repeat=false hotkey-overlay-title="Toggle screen recording with desktop audio" { spawn "/home/minis/.local/bin/screenrecord-toggle" "--with-desktop-audio"; }
+    Shift+Alt+Print repeat=false hotkey-overlay-title="Toggle screen recording with desktop and microphone audio" { spawn "/home/minis/.local/bin/screenrecord-toggle" "--with-desktop-audio" "--with-microphone-audio"; }
     Mod+Shift+C { spawn-sh "hyprpicker -a"; }
     // Mod+Shift+S { screenshot; }
     // Ctrl+Print { screenshot-screen; }
