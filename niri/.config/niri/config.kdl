@@ -118,7 +118,7 @@ layout {
 spawn-at-startup "qs" "-c" "noctalia-shell"
 spawn-at-startup "vicinae" "server"
 
-spawn-sh-at-startup "swaybg -i ~/dotfiles/wallpapers/Pictures/Wallpapers/nicola_samori.png"
+// spawn-sh-at-startup "swaybg -i ~/dotfiles/wallpapers/Pictures/Wallpapers/nicola_samori.png"
 
 hotkey-overlay {
     // Uncomment this line to disable the "Important Hotkeys" pop-up at startup.
@@ -189,6 +189,12 @@ layer-rule {
     place-within-backdrop true
 }
 
+// Set the overview wallpaper on the backdrop.
+layer-rule {
+  match namespace="^noctalia-overview*"
+  place-within-backdrop true
+}
+
 binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
     Mod+Space repeat=false { spawn "vicinae" "toggle"; }
@@ -196,8 +202,12 @@ binds {
 
     // Suggested binds for running programs: terminal, app launcher, screen locker.
     Mod+Return hotkey-overlay-title="Open a Terminal: ghostty" { spawn "ghostty"; }
-    Super+Shift+B hotkey-overlay-title="Open Brave Browser" { spawn "brave-origin-beta"; }
     Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
+    Super+B hotkey-overlay-title="Open Brave Browser" { spawn "brave-origin-beta"; }
+
+    // Web Apps
+    Mod+P hotkey-overlay-title="Open Perplexity" { spawn "brave-origin-beta" "--app=https://www.perplexity.ai"; }
+    Mod+G hotkey-overlay-title="Open ChatGPT" { spawn "brave-origin-beta" "--app=https://www.chatgpt.com"; }
 
     // Use spawn-sh to run a shell command. Do this if you need pipes, multiple commands, etc.
     // Note: the entire command goes as a single argument. It's passed verbatim to `sh -c`.

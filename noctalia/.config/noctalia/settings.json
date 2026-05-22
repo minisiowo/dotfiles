@@ -683,7 +683,7 @@
         "automationEnabled": false,
         "directory": "/home/minis/dotfiles/wallpapers/Pictures/Wallpapers",
         "enableMultiMonitorDirectories": false,
-        "enabled": false,
+        "enabled": true,
         "favorites": [
         ],
         "fillColor": "#000000",
@@ -693,7 +693,7 @@
         "monitorDirectories": [
         ],
         "overviewBlur": 0.4,
-        "overviewEnabled": false,
+        "overviewEnabled": true,
         "overviewTint": 0.6,
         "panelPosition": "follow_bar",
         "randomIntervalSec": 300,
