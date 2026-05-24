@@ -1,5 +1,10 @@
 prefer-no-csd
 
+// Programy uruchamiane razem z sesją.
+spawn-at-startup "qs" "-c" "noctalia-shell"
+spawn-at-startup "vicinae" "server"
+spawn-sh-at-startup "swaybg -i ~/dotfiles/wallpapers/Pictures/Wallpapers/nicola_samori.png"
+
 // Urządzenia wejściowe i podstawowe zachowanie fokusu.
 input {
     keyboard {
@@ -96,10 +101,6 @@ layout {
     struts {}
 }
 
-// Programy uruchamiane razem z sesją.
-spawn-at-startup "qs" "-c" "noctalia-shell"
-spawn-at-startup "vicinae" "server"
-
 hotkey-overlay {
     skip-at-startup
 }
@@ -138,13 +139,15 @@ binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
     Mod+Space repeat=false { spawn "vicinae" "toggle"; }
     Mod+Alt+V repeat=false { spawn "vicinae" "vicinae://launch/clipboard/history"; }
+    Mod+Alt+B repeat=false hotkey-overlay-title="Search Raindrop bookmarks" { spawn "vicinae" "vicinae://launch/@minisiowo/raindropio/raindrop"; }
 
-    Mod+Return hotkey-overlay-title="Open a Terminal: ghostty" { spawn "ghostty"; }
-    Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
-    Super+B hotkey-overlay-title="Open Brave Browser" { spawn "brave-origin-beta"; }
-    Mod+P hotkey-overlay-title="Open Perplexity" { spawn "brave-origin-beta" "--app=https://www.perplexity.ai"; }
-    Mod+G hotkey-overlay-title="Open ChatGPT" { spawn "brave-origin-beta" "--app=https://www.chatgpt.com"; }
-    Super+Alt+S allow-when-locked=true hotkey-overlay-title=null { spawn-sh "pkill orca || exec orca"; }
+    Mod+Shift+Return hotkey-overlay-title="Open a Terminal: ghostty" { spawn "ghostty"; }
+    Mod+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
+    Mod+Shift+B hotkey-overlay-title="Open Brave Browser" { spawn "brave-origin-beta"; }
+    Mod+Shift+P hotkey-overlay-title="Open Perplexity" { spawn "brave-origin-beta" "--app=https://www.perplexity.ai"; }
+    Mod+Shift+G hotkey-overlay-title="Open Gemini" { spawn "brave-origin-beta" "--app=https://gemini.google.com"; }
+    Mod+Shift+C hotkey-overlay-title="Open ChatGPT" { spawn "brave-origin-beta" "--app=https://www.chatgpt.com"; }
+    Mod+Alt+O allow-when-locked=true hotkey-overlay-title=null { spawn-sh "pkill orca || exec orca"; }
 
     // Klawisze multimedialne i jasność.
     XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+ -l 1.0"; }
@@ -286,17 +289,17 @@ binds {
     Mod+W       { toggle-column-tabbed-display; }
 
     // Screenshoty, nagrywanie ekranu i picker kolorów.
-    Mod+Shift+S { spawn-sh "grim -g \"$(slurp -d)\" - | wl-copy --type image/png"; }
-    Alt+Print repeat=false hotkey-overlay-title="Toggle screen recording" { spawn "/home/minis/.local/bin/screenrecord-toggle"; }
-    Ctrl+Alt+Print repeat=false hotkey-overlay-title="Toggle screen recording with desktop audio" { spawn "/home/minis/.local/bin/screenrecord-toggle" "--with-desktop-audio"; }
-    Shift+Alt+Print repeat=false hotkey-overlay-title="Toggle screen recording with desktop and microphone audio" { spawn "/home/minis/.local/bin/screenrecord-toggle" "--with-desktop-audio" "--with-microphone-audio"; }
-    Mod+Shift+C { spawn-sh "hyprpicker -a"; }
+    Mod+Alt+S { spawn-sh "grim -g \"$(slurp -d)\" - | wl-copy --type image/png"; }
+    Mod+Print repeat=false hotkey-overlay-title="Toggle screen recording with desktop audio" { spawn "/home/minis/.local/bin/screenrecord-toggle" "--with-desktop-audio"; }
+    Mod+Ctrl+Print repeat=false hotkey-overlay-title="Toggle screen recording" { spawn "/home/minis/.local/bin/screenrecord-toggle"; }
+    Mod+Shift+Print repeat=false hotkey-overlay-title="Toggle screen recording with desktop and microphone audio" { spawn "/home/minis/.local/bin/screenrecord-toggle" "--with-desktop-audio" "--with-microphone-audio"; }
+    Mod+Alt+C { spawn-sh "hyprpicker -a"; }
 
     // Sesja i zasilanie.
     Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
-    Mod+Shift+E { quit; }
+    Mod+Alt+E { quit; }
     Ctrl+Alt+Delete { quit; }
-    Mod+Shift+P { power-off-monitors; }
+    Mod+Alt+P { power-off-monitors; }
 }
 
 // Zmienne środowiskowe dla aplikacji.
