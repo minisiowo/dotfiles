@@ -3,7 +3,7 @@ prefer-no-csd
 // Programy uruchamiane razem z sesją.
 spawn-at-startup "qs" "-c" "noctalia-shell"
 spawn-at-startup "vicinae" "server"
-spawn-sh-at-startup "swaybg -i ~/dotfiles/wallpapers/Pictures/Wallpapers/nicola_samori.png"
+spawn-sh-at-startup "swaybg -o '*' -i ~/dotfiles/wallpapers/Pictures/Wallpapers/nicola_samori.png -m fill -o DP-9 -i ~/dotfiles/wallpapers/Pictures/Wallpapers/nicola_samori-blur-right-1440x2560.png -m fill"
 
 // Urządzenia wejściowe i podstawowe zachowanie fokusu.
 input {
@@ -13,6 +13,8 @@ input {
             options "caps:escape"
         }
         numlock
+
+        repeat-delay 200
     }
 
     touchpad {
@@ -37,30 +39,31 @@ input {
 
 // Monitory.
 output "eDP-1" {
-    mode "1920x1080@60.020"
+    mode "1920x1200@60.001"
     scale 1
     transform "normal"
     position x=0 y=0
 }
 
-output "DP-2" {
-    mode "2560x1440@74.780"
-    scale 1
-    transform "normal"
-    position x=1920 y=0
-}
-
-output "DP-9" {
-    mode "2560x1440@74.780"
-    scale 1
-    transform "normal"
-    position x=1920 y=0
-}
-
 output "DP-7" {
-    mode "1920x1080@100"
+    mode "2560x1440@74.780"
     scale 1
+    transform "normal"
+    position x=-320 y=-1455
 }
+
+// VERTICAL SCREEN
+output "DP-8" {
+    mode "2560x1440@74.780"
+    scale 1
+    transform "270"
+    position x=2240 y=-1735
+
+    layout {
+        default-column-width { proportion 1.0; }
+    }
+}
+
 
 // Układ okien, odstępy i dekoracje.
 layout {
@@ -98,7 +101,7 @@ layout {
         color "#0007"
     }
 
-    struts {}
+    struts
 }
 
 hotkey-overlay {
@@ -107,25 +110,21 @@ hotkey-overlay {
 
 screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
 
-animations {}
+animations
+
 
 // Reguły dla konkretnych okien.
 window-rule {
-    match app-id=r#"^org\.wezfurlong\.wezterm$"#
-    default-column-width {}
+    match app-id=r"^org\.wezfurlong\.wezterm$"
+    default-column-width
 }
 
 window-rule {
-    match app-id=r#"firefox$"# title="^Picture-in-Picture$"
-    match app-id=r#"zen$"# title="^Picture-in-Picture$"
+    match app-id=r"firefox$" title="^Picture-in-Picture$"
+    match app-id=r"zen$" title="^Picture-in-Picture$"
     match title="^Picture in picture$"
     open-floating true
     default-floating-position x=32 y=32 relative-to="bottom-right"
-}
-
-window-rule {
-    match app-id=r#"^org\.telegram\.desktop$"#
-    open-floating true
 }
 
 // Warstwy powłoki Noctalia.
@@ -134,16 +133,191 @@ layer-rule {
     place-within-backdrop true
 }
 
+window-rule {
+    match app-id="Zoom"
+    open-floating true
+}
+
+window-rule { match app-id=r"^org\.telegram\.desktop$"; open-floating true; }
+
 binds {
+    // Launcher, terminal, aplikacje i overlay skrótów.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // Klawisze multimedialne i jasność.
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // Podstawowe akcje okien i overview.
+
+
+
+    // Nawigacja i przenoszenie okien/kolumn.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // Workspaces.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // Nawigacja kółkiem myszy/touchpadem.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // Szybki wybór i przenoszenie na workspaces 1-9.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // Zarządzanie kolumnami, rozmiarem i trybem floating.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // Screenshoty, nagrywanie ekranu i picker kolorów.
+
+
+
+
+
+
+    // Sesja i zasilanie.
+
+
+
+
     // Launcher, terminal, aplikacje i overlay skrótów.
     Mod+Shift+Slash { show-hotkey-overlay; }
     Mod+Space repeat=false { spawn "vicinae" "toggle"; }
+    Mod+Alt+R repeat=false hotkey-overlay-title="Restart Vicinae server" { spawn "vicinae" "server" "--replace"; }
     Mod+Alt+V repeat=false { spawn "vicinae" "vicinae://launch/clipboard/history"; }
     Mod+Alt+B repeat=false hotkey-overlay-title="Search Raindrop bookmarks" { spawn "vicinae" "vicinae://launch/@minisiowo/raindropio/raindrop"; }
 
-    Mod+Shift+Return hotkey-overlay-title="Open a Terminal: ghostty" { spawn "ghostty"; }
+    Mod+Return hotkey-overlay-title="Open a Terminal: ghostty" { spawn "ghostty"; }
     Mod+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
     Mod+Shift+B hotkey-overlay-title="Open Brave Browser" { spawn "brave-origin-beta"; }
+    Mod+Shift+N hotkey-overlay-title="Open Brave Browser Incognito" { spawn "brave-origin-beta" "--incognito"; }
     Mod+Shift+P hotkey-overlay-title="Open Perplexity" { spawn "brave-origin-beta" "--app=https://www.perplexity.ai"; }
     Mod+Shift+G hotkey-overlay-title="Open Gemini" { spawn "brave-origin-beta" "--app=https://gemini.google.com"; }
     Mod+Shift+C hotkey-overlay-title="Open ChatGPT" { spawn "brave-origin-beta" "--app=https://www.chatgpt.com"; }
@@ -152,8 +326,8 @@ binds {
     // Klawisze multimedialne i jasność.
     XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+ -l 1.0"; }
     XF86AudioLowerVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1-"; }
-    XF86AudioMute        allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"; }
-    XF86AudioMicMute     allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
+    XF86AudioMute allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"; }
+    XF86AudioMicMute allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
 
     XF86AudioPlay allow-when-locked=true { spawn-sh "playerctl play-pause"; }
     XF86AudioStop allow-when-locked=true { spawn-sh "playerctl stop"; }
@@ -223,9 +397,9 @@ binds {
 
     // Nawigacja kółkiem myszy/touchpadem.
     Mod+WheelScrollDown cooldown-ms=150 { focus-column-right; }
-    Mod+WheelScrollUp   cooldown-ms=150 { focus-column-left; }
+    Mod+WheelScrollUp cooldown-ms=150 { focus-column-left; }
     Mod+Ctrl+WheelScrollDown cooldown-ms=150 { focus-workspace-down; }
-    Mod+Ctrl+WheelScrollUp   cooldown-ms=150 { focus-workspace-up; }
+    Mod+Ctrl+WheelScrollUp cooldown-ms=150 { focus-workspace-up; }
 
     Mod+WheelScrollRight { focus-column-right; }
     Mod+WheelScrollLeft  { focus-column-left; }
@@ -237,9 +411,9 @@ binds {
     Mod+Ctrl+Shift+WheelScrollLeft  { move-column-to-monitor-left; }
 
     Mod+Shift+WheelScrollDown cooldown-ms=150 { move-column-right; }
-    Mod+Shift+WheelScrollUp   cooldown-ms=150 { move-column-left; }
+    Mod+Shift+WheelScrollUp cooldown-ms=150 { move-column-left; }
     Mod+Ctrl+Shift+WheelScrollDown cooldown-ms=150 { move-column-to-workspace-down; }
-    Mod+Ctrl+Shift+WheelScrollUp   cooldown-ms=150 { move-column-to-workspace-up; }
+    Mod+Ctrl+Shift+WheelScrollUp cooldown-ms=150 { move-column-to-workspace-up; }
 
     // Szybki wybór i przenoszenie na workspaces 1-9.
     Mod+1 { focus-workspace 1; }
@@ -273,8 +447,7 @@ binds {
     Mod+Ctrl+R  { reset-window-height; }
 
     Mod+F       { maximize-column; }
-    Mod+Shift+F { fullscreen-window; }
-    Mod+Ctrl+F  { expand-column-to-available-width; }
+    Ctrl+Shift+F { fullscreen-window; }
 
     Mod+C      { center-column; }
     Mod+Ctrl+C { center-visible-columns; }
@@ -289,7 +462,7 @@ binds {
     Mod+W       { toggle-column-tabbed-display; }
 
     // Screenshoty, nagrywanie ekranu i picker kolorów.
-    Mod+Alt+S { spawn-sh "grim -g \"$(slurp -d)\" - | wl-copy --type image/png"; }
+    Mod+Shift+S hotkey-overlay-title="Screenshot selected area to clipboard" { spawn-sh "grim -g \"$(slurp -d)\" - | wl-copy --type image/png"; }
     Mod+Print repeat=false hotkey-overlay-title="Toggle screen recording with desktop audio" { spawn "/home/minis/.local/bin/screenrecord-toggle" "--with-desktop-audio"; }
     Mod+Ctrl+Print repeat=false hotkey-overlay-title="Toggle screen recording" { spawn "/home/minis/.local/bin/screenrecord-toggle"; }
     Mod+Shift+Print repeat=false hotkey-overlay-title="Toggle screen recording with desktop and microphone audio" { spawn "/home/minis/.local/bin/screenrecord-toggle" "--with-desktop-audio" "--with-microphone-audio"; }
@@ -300,6 +473,7 @@ binds {
     Mod+Alt+E { quit; }
     Ctrl+Alt+Delete { quit; }
     Mod+Alt+P { power-off-monitors; }
+    Mod+Shift+F { spawn "nautilus" "--new-window"; }
 }
 
 // Zmienne środowiskowe dla aplikacji.

@@ -2,6 +2,22 @@
 
 Konfiguracje są ułożone pod GNU Stow: każdy katalog na pierwszym poziomie jest osobnym pakietem, np. `tmux`, `nvim`, `zsh`, `pi`.
 
+## Niri
+
+Konfiguracja Niri jest w `niri/.config/niri/`.
+
+Najważniejsze skróty niestandardowe:
+- `Mod + Shift + S` — zrzut zaznaczonego obszaru do schowka
+- `Mod + Print` — przełącz nagrywanie ekranu z dźwiękiem pulpitu
+- `Mod + Ctrl + Print` — przełącz nagrywanie ekranu bez dodatkowego audio
+- `Mod + Shift + Print` — przełącz nagrywanie ekranu z dźwiękiem pulpitu i mikrofonem
+
+Instalacja:
+
+```bash
+stow niri
+```
+
 ## Pi
 
 Globalna konfiguracja Pi jest w `pi/.pi/agent/` i po `stow pi` trafia do `~/.pi/agent/`.

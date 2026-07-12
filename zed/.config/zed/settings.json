@@ -7,6 +7,20 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "outline_panel": {
+    "dock": "left"
+  },
+  "collaboration_panel": {
+    "dock": "left"
+  },
+  "agent": {
+    "dock": "right",
+    "favorite_models": [],
+    "model_parameters": []
+  },
+  "git_panel": {
+    "dock": "left"
+  },
   "telemetry": {
     "diagnostics": true,
     "metrics": false
@@ -15,8 +29,8 @@
   "relative_line_numbers": "enabled",
   "ui_font_size": 14,
   "ui_font_family": ".ZedSans",
-  "buffer_font_size": 14,
-  "buffer_font_family": "CaskaydiaMono Nerd Font Mono",
+  "buffer_font_size": 13,
+  "buffer_font_family": "JetBrainsMono Nerd Font Mono",
   "theme": {
     "mode": "dark",
     "light": "One Light",
@@ -25,7 +39,8 @@
   "buffer_line_height": { "custom": 1.4 },
   "buffer_font_weight": 350, //default is 400
   "icon_theme": "Zed (Default)",
-  "project_panel": { "entry_spacing": "standard" },
+  "project_panel": { "dock": "left",
+                     "entry_spacing": "standard" },
   "tabs": { "file_icons": true },
   "git": { "inline_blame": { "enabled": false } },
   "current_line_highlight": "none",
