@@ -10,10 +10,8 @@ dynamic_title = true
 history = 10000
 
 [font]
-normal = { family = "JetBrainsMono Nerd Font", style = "Regular" }
-bold   = { family = "JetBrainsMono Nerd Font", style = "Bold" }
-italic = { family = "JetBrainsMono Nerd Font", style = "Italic" }
-size = 10.0
+normal = { family = "IosevkaTerm Nerd Font Mono", style = "Medium" }
+size = 11.0
 
 [cursor]
 style = { shape = "Block", blinking = "Off" }
@@ -25,7 +23,7 @@ TERM = "xterm-256color"
 # Kanagawa Dragon Alacritty Colors
 
 [colors.primary]
-background = '#0d0d0d'
+# background = '#0d0d0d'
 foreground = '#c5c9c5'
 
 [colors.normal]
