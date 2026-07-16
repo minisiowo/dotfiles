@@ -1,44 +1,52 @@
-# Neovim swap files
+# Neovim runtime logs
+nvim.log
+log
+*.log
+
+# Editor temporary files
 *.swp
 *.swo
-
-# Neovim backup files
-*~
 *.tmp
+*.bak
+*.orig
+*~
 
-# Neovim undo files
-*.un~
-
-# Neovim view files
-*.view
-
-# Plugin managers
-lazy.nvim/
-plugged/
-site/pack/
-lazy-lock.json
-
-# Cache i dane sesji
-.netrwhist
-tags
-.tags
+# Session and local state files
 Session.vim
+Sessionx.vim
+.netrwhist
+shada
+*.shada
+*.shada.tmp.*
 
-# OS generated files
+# Local tool/editor metadata
+.codex
+.codex/
 .DS_Store
-.DS_Store?
-._*
-Thumbs.db
-ehthumbs.db
+.direnv/
+.env
+.env.*
 
-# Lokalne pliki konfiguracyjne
+# Neovim / plugin local data that should not be versioned if created here
+.cache/
+.mason/
+.rocks/
+.luarocks/
+.nvim.lua
+
+# Local development overrides
+lua/local.lua
 lua/local/
-local.lua
+after/plugin/local.lua
+after/plugin/local/
 
-# Language Server Protocol
-.null-ls_*
-.luarc.json
+# LSP / formatter / ctags scratch files that can appear in the config dir
+tags
+tags-*
 
-# Debug logs
-*.log
-.nvimlog
+# OS-generated files
+Thumbs.db
+
+# Test / scratch areas
+tmp/
+tests/tmp/

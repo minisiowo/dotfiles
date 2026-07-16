@@ -1,80 +1,29 @@
-return {
-    {
-        "nvim-treesitter/nvim-treesitter",
-        branch = 'master',
-        lazy = false,
-        build = ":TSUpdate",
-        config = function()
-            ---@diagnostic disable-next-line: missing-fields
-            require("nvim-treesitter.configs").setup({
-                ensure_installed = {
-                    "bash",
-                    "c",
-                    "c_sharp",
-                    "css",
-                    "dockerfile",
-                    "html",
-                    "json",
-                    "jsonc",
-                    "javascript",
-                    "lua",
-                    "markdown",
-                    "markdown_inline",
-                    "python",
-                    "query",
-                    "rust",
-                    "toml",
-                    "vim",
-                    "vimdoc",
-                    "xml",
-                    "yaml",
-                },
-                auto_install = true,
-                highlight = {
-                    enable = true,
-                },
-                incremental_selection = {
-                    enable = true,
-                    keymaps = {
-                        init_selection = "<Leader>ss",
-                        node_incremental = "<Leader>si",
-                        scope_incremental ="<Leader>sc",
-                        node_decremental = "<Leader>sd",
-                    },
-                },
-                -- poniżej odnośnie pluginu 'nvim-treesitter-textobjects'
-                textobjects = {
-                    select = {
-                        enable = true,
+local M = {}
 
-                        -- Automatically jump forward to textobj, similar to targets.vim
-                        lookahead = true,
+M.setup = function ()
+    require("nvim-treesitter").install({
+        "c",
+        "lua",
+        "vim",
+        "vimdoc",
+        "query",
+        "html",
+        "css",
+        "javascript",
+        "typescript",
+        "python",
+        "rust",
+        "markdown",
+        "markdown_inline",
+        "typst",
+    })
 
-                        keymaps = {
-                            -- You can use the capture groups defined in textobjects.scm
-                            ["af"] = "@function.outer",
-                            ["if"] = "@function.inner",
-                            ["ac"] = "@class.outer",
-                            ["ic"] = { query = "@class.inner", desc = "Select inner part of a class region" },
-                            -- You can also use captures from other query groups like `locals.scm`
-                            ["as"] = { query = "@local.scope", query_group = "locals", desc = "Select language scope" },
-                        },
-                        selection_modes = {
-                            ['@parameter.outer'] = 'v', -- charwise
-                            ['@function.outer'] = 'v', -- linewise was, now is charwise also (V to be linewise)
-                            ['@class.outer'] = '<c-v>', -- blockwise
-                        },
-                        -- If you set this to `true` (default is `false`) then any textobject is
-                        -- extended to include preceding or succeeding whitespace. Succeeding
-                        -- whitespace has priority in order to act similarly to eg the built-in
-                        -- `ap`.
-                        include_surrounding_whitespace = true,
-                    },
-                },
-            })
+    vim.api.nvim_create_autocmd("FileType", {
+        pattern = "*",
+        callback = function()
+            pcall(vim.treesitter.start)
         end,
-    },
-    {
-        "nvim-treesitter/nvim-treesitter-textobjects",
-    },
-}
+    })
+end
+
+return M
