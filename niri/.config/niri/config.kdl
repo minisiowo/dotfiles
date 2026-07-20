@@ -1,9 +1,7 @@
 prefer-no-csd
 
 // Programy uruchamiane razem z sesją.
-spawn-at-startup "qs" "-c" "noctalia-shell"
-spawn-at-startup "vicinae" "server"
-spawn-sh-at-startup "swaybg -o '*' -i ~/dotfiles/wallpapers/Pictures/Wallpapers/nicola_samori.png -m fill -o DP-9 -i ~/dotfiles/wallpapers/Pictures/Wallpapers/nicola_samori-blur-right-1440x2560.png -m fill"
+spawn-at-startup "noctalia"
 
 // Urządzenia wejściowe i podstawowe zachowanie fokusu.
 input {
@@ -127,10 +125,21 @@ window-rule {
     default-floating-position x=32 y=32 relative-to="bottom-right"
 }
 
-// Warstwy powłoki Noctalia.
+// Warstwy i okna powłoki Noctalia v5.
 layer-rule {
-    match namespace="^noctalia-overview*"
+    match namespace="^noctalia-backdrop"
     place-within-backdrop true
+}
+
+window-rule {
+    match app-id="dev.noctalia.Noctalia"
+    open-floating true
+    default-column-width { fixed 1080; }
+    default-window-height { fixed 920; }
+}
+
+debug {
+    honor-xdg-activation-with-invalid-serial
 }
 
 window-rule {
@@ -309,10 +318,8 @@ binds {
 
     // Launcher, terminal, aplikacje i overlay skrótów.
     Mod+Shift+Slash { show-hotkey-overlay; }
-    Mod+Space repeat=false { spawn "vicinae" "toggle"; }
-    Mod+Alt+R repeat=false hotkey-overlay-title="Restart Vicinae server" { spawn "vicinae" "server" "--replace"; }
-    Mod+Alt+V repeat=false { spawn "vicinae" "vicinae://launch/clipboard/history"; }
-    Mod+Alt+B repeat=false hotkey-overlay-title="Search Raindrop bookmarks" { spawn "vicinae" "vicinae://launch/@minisiowo/raindropio/raindrop"; }
+    Mod+Space repeat=false hotkey-overlay-title="Open Noctalia launcher" { spawn "noctalia" "msg" "panel-toggle" "launcher"; }
+    Mod+Alt+V repeat=false hotkey-overlay-title="Open Noctalia clipboard" { spawn "noctalia" "msg" "panel-toggle" "clipboard"; }
 
     Mod+Return hotkey-overlay-title="Open a Terminal: ghostty" { spawn "ghostty"; }
     Mod+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
