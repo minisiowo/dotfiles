@@ -1,3 +1,11 @@
 [theme.templates]
 enable_builtin_templates = true
 builtin_ids = ["niri"]
+
+[plugins]
+enabled = ["dominik/battery-threshold"]
+
+[[plugins.source]]
+name = "local-dotfiles"
+kind = "path"
+location = "~/.config/noctalia/v5-plugins"
