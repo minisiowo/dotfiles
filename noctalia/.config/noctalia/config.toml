@@ -6,6 +6,6 @@ builtin_ids = ["niri"]
 enabled = ["dominik/battery-threshold"]
 
 [[plugins.source]]
-name = "local-dotfiles"
+name = "local-developer"
 kind = "path"
-location = "~/.config/noctalia/v5-plugins"
+location = "~/Developer"
