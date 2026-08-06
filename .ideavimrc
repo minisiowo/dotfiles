@@ -1,0 +1,196 @@
+" .ideavimrc - przystosowany do ustawień Neovim (~/.config/nvim)
+
+" ============================================================================
+" LEADER
+" ============================================================================
+let mapleader=" "
+let maplocalleader=","
+
+" ============================================================================
+" OPCJE (odpowiedniki vim.opt.*)
+" ============================================================================
+set number
+set relativenumber
+set scrolloff=999
+set nowrap
+set ignorecase
+set smartcase
+set incsearch
+set hlsearch
+set virtualedit=block
+
+" Clipboard z natywnym wklejaniem IDE
+set clipboard+=unnamed,ideaput
+
+" IdeaVim-specific
+set ideajoin
+set ideastatusicon=gray
+set idearefactormode=keep
+
+" Nie używaj Ex mode
+map Q gq
+
+" ============================================================================
+" PLUGINY
+" ============================================================================
+" Highlight yanked text (vim-highlightedyank)
+Plug 'machakann/vim-highlightedyank'
+let g:highlightedyank_highlight_duration = "300"
+
+" Commentary (gcc, gc{motion})
+Plug 'tpope/vim-commentary'
+
+" Surround (odpowiednik mini.surround: ys, cs, ds)
+Plug 'tpope/vim-surround'
+
+" Sneak - odpowiednik leap.nvim (s/S + 2 znaki)
+Plug 'justinmk/vim-sneak'
+
+" NERDTree - odpowiednik neo-tree
+Plug 'preservim/nerdtree'
+
+" Which-Key - odpowiednik mini.clue (pokazuje dostępne keybindings)
+set which-key
+set notimeout
+
+" Opisy grup dla Which-Key (odpowiednik mini.clue clues)
+let g:WhichKeyDesc_find           = "<Space>f  +find"
+let g:WhichKeyDesc_find_files     = "<Space>ff files"
+let g:WhichKeyDesc_find_grep      = "<Space>fg grep"
+let g:WhichKeyDesc_find_buffers   = "<Space>fb buffers"
+let g:WhichKeyDesc_find_help      = "<Space>fh actions"
+let g:WhichKeyDesc_find_structure = "<Space>fs file structure"
+let g:WhichKeyDesc_find_recent    = "<Space>fr recent files"
+
+let g:WhichKeyDesc_diagnostics       = "<Space>d  +diagnostics"
+let g:WhichKeyDesc_diagnostics_desc  = "<Space>dd show error"
+let g:WhichKeyDesc_diagnostics_list  = "<Space>dl problems"
+let g:WhichKeyDesc_diagnostics_qf    = "<Space>dq problems"
+
+let g:WhichKeyDesc_debug             = "<Space>db toggle breakpoint"
+let g:WhichKeyDesc_debug_run         = "<Space>dr debug"
+
+let g:WhichKeyDesc_rename            = "<Space>rn rename"
+let g:WhichKeyDesc_refactor_action   = "<Space>ra intentions"
+let g:WhichKeyDesc_run_class         = "<Space>rc run class"
+let g:WhichKeyDesc_run_run           = "<Space>rr run"
+
+let g:WhichKeyDesc_splits            = "<Space>s  +splits"
+let g:WhichKeyDesc_splits_horiz      = "<Space>sh split horizontal"
+let g:WhichKeyDesc_splits_vert       = "<Space>sv split vertical"
+let g:WhichKeyDesc_splits_equal      = "<Space>s= equalize"
+
+let g:WhichKeyDesc_visual            = "<Space>v  +visual"
+let g:WhichKeyDesc_visual_line       = "<Space>vl select line content"
+
+let g:WhichKeyDesc_explorer          = "<Space>e  explorer"
+let g:WhichKeyDesc_format            = "<Space>cf format"
+let g:WhichKeyDesc_close             = "<Space>q  close tab"
+let g:WhichKeyDesc_git               = "<Space>gg git"
+let g:WhichKeyDesc_terminal          = "<Space>tt terminal"
+
+" Multiple cursors
+Plug 'terryma/vim-multiple-cursors'
+
+" Mini.ai - dodatkowe text objects (aq, iq, ab, ib)
+set mini-ai
+
+" matchit - rozszerzone %
+packadd matchit
+
+" ============================================================================
+" NAWIGACJA OKIEN (odpowiednik C-hjkl w Neovim)
+" ============================================================================
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
+" ============================================================================
+" SPLITY (odpowiednik leader+sh/sv/s=)
+" ============================================================================
+nmap <leader>sh <Action>(SplitHorizontally)
+nmap <leader>sv <Action>(SplitVertically)
+nmap <leader>s= <Action>(MaximizeEditorInSplit)
+
+" ============================================================================
+" NAWIGACJA TABÓW (H/L - poprzedni/następny tab)
+" ============================================================================
+nmap H <Action>(PreviousTab)
+nmap L <Action>(NextTab)
+
+" ============================================================================
+" EXPLORER (odpowiednik leader+e -> neo-tree toggle)
+" ============================================================================
+nmap <leader>e :NERDTreeToggle<CR>
+
+" ============================================================================
+" WYSZUKIWANIE PLIKÓW (odpowiednik leader+ff/fg/fb/fh z mini.pick)
+" ============================================================================
+nmap <leader>ff <Action>(GotoFile)
+nmap <leader>fg <Action>(FindInPath)
+nmap <leader>fb <Action>(Switcher)
+nmap <leader>fh <Action>(GotoAction)
+
+" ============================================================================
+" DIAGNOSTICS (odpowiednik leader+dd/dl/dq)
+" ============================================================================
+nmap <leader>dd <Action>(ShowErrorDescription)
+nmap <leader>dl <Action>(ActivateProblemsViewToolWindow)
+nmap <leader>dq <Action>(ActivateProblemsViewToolWindow)
+
+" Nawigacja po błędach
+nmap ]d <Action>(GotoNextError)
+nmap [d <Action>(GotoPreviousError)
+
+" ============================================================================
+" LSP / REFACTORING (odpowiednik leader+rn)
+" ============================================================================
+nmap <leader>rn <Action>(RenameElement)
+nmap <leader>ra <Action>(ShowIntentionActions)
+nmap gd <Action>(GotoDeclaration)
+nmap gi <Action>(GotoImplementation)
+nmap gr <Action>(ShowUsages)
+nmap gy <Action>(GotoTypeDeclaration)
+nmap K <Action>(ShowHoverInfo)
+
+" ============================================================================
+" NOH - wyczyść podświetlenie wyszukiwania (odpowiednik Esc -> noh)
+" ============================================================================
+nnoremap <Esc> :nohlsearch<CR>
+
+" ============================================================================
+" LINE SELECT (odpowiednik leader+vl -> _vg_)
+" ============================================================================
+nnoremap <leader>vl _vg_
+
+" ============================================================================
+" FORMATOWANIE
+" ============================================================================
+nmap <leader>cf <Action>(ReformatCode)
+
+" ============================================================================
+" DODATKOWE PRZYDATNE MAPOWANIA IDE
+" ============================================================================
+" Debugowanie
+nmap <leader>db <Action>(ToggleLineBreakpoint)
+nmap <leader>dr <Action>(Debug)
+
+" Run
+nmap <leader>rc <Action>(RunClass)
+nmap <leader>rr <Action>(Run)
+
+" Git
+nmap <leader>gg <Action>(ActivateVersionControlToolWindow)
+
+" Terminal
+nmap <leader>tt <Action>(ActivateTerminalToolWindow)
+
+" Zamknij aktywny tab/editor
+nmap <leader>q <Action>(CloseContent)
+
+" Struktura pliku (jak mini.pick symbols)
+nmap <leader>fs <Action>(FileStructurePopup)
+
+" Recent files
+nmap <leader>fr <Action>(RecentFiles)
