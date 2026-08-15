@@ -35,6 +35,10 @@ input {
     focus-follows-mouse max-scroll-amount="10%"
 }
 
+cursor {
+    hide-when-typing
+}
+
 // Monitory.
 output "eDP-1" {
     mode "1920x1200@60.001"
@@ -43,7 +47,14 @@ output "eDP-1" {
     position x=0 y=0
 }
 
-output "DP-7" {
+output "Samsung Electric Company LF27T850 H4ZN500449" {
+    mode "2560x1440"
+    scale 1
+    transform "normal"
+    position x=-320 y=-1455
+}
+
+output "Lenovo Group Limited P24h-30 V90CHBBM" {
     mode "2560x1440@74.780"
     scale 1
     transform "normal"
@@ -51,7 +62,7 @@ output "DP-7" {
 }
 
 // VERTICAL SCREEN
-output "DP-8" {
+output "Lenovo Group Limited P24h-2L V309YGV8" {
     mode "2560x1440@74.780"
     scale 1
     transform "270"
@@ -370,8 +381,8 @@ binds {
 
     Mod+Ctrl+Left  { focus-monitor-left; }
     Mod+Ctrl+Right { focus-monitor-right; }
-    Mod+Ctrl+Up    { focus-monitor-up; }
-    Mod+Ctrl+Down  { focus-monitor-down; }
+    Mod+Ctrl+Up    { focus-workspace-up; }
+    Mod+Ctrl+Down  { focus-workspace-down; }
     Mod+Ctrl+H     { focus-monitor-left; }
     Mod+Ctrl+L     { focus-monitor-right; }
     Mod+Ctrl+K     { focus-monitor-up; }

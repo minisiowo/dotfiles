@@ -19,8 +19,12 @@ set incsearch
 set hlsearch
 set virtualedit=block
 
-" Clipboard z natywnym wklejaniem IDE
-set clipboard+=unnamed,ideaput
+" Schowek jak w mini.basics: y/p wewnętrznie, gy/gp przez systemowy rejestr +
+set clipboard=
+nnoremap gy "+y
+xnoremap gy "+y
+nnoremap gp "+p
+xnoremap gp "+P
 
 " IdeaVim-specific
 set ideajoin
@@ -47,6 +51,18 @@ Plug 'tpope/vim-surround'
 Plug 'justinmk/vim-sneak'
 
 " NERDTree - odpowiednik neo-tree
+" Mapowania zgodne z ~/.config/nvim/lua/plugins/neo-tree.lua i domyślnymi Neo-tree
+let g:NERDTreeMapActivateNode = "l"
+let g:NERDTreeMapCloseDir = "h"
+let g:NERDTreeMapToggleHidden = "H"
+let g:NERDTreeMapNewFile = "a"
+let g:NERDTreeMapNewDir = "A"
+let g:NERDTreeMapRename = "r"
+let g:NERDTreeMapDelete = "d"
+let g:NERDTreeMapCopy = "y"
+let g:NERDTreeMapPaste = "p"
+" W drzewku <Space>e zamyka Project Tool Window, tak jak toggle w Neo-tree
+let g:NERDTreeMapQuit = "<Space>e"
 Plug 'preservim/nerdtree'
 
 " Which-Key - odpowiednik mini.clue (pokazuje dostępne keybindings)
@@ -150,8 +166,8 @@ nmap <leader>rn <Action>(RenameElement)
 nmap <leader>ra <Action>(ShowIntentionActions)
 nmap gd <Action>(GotoDeclaration)
 nmap gi <Action>(GotoImplementation)
-nmap gr <Action>(ShowUsages)
-nmap gy <Action>(GotoTypeDeclaration)
+nmap grr <Action>(ShowUsages)
+nmap grt <Action>(GotoTypeDeclaration)
 nmap K <Action>(ShowHoverInfo)
 
 " ============================================================================
