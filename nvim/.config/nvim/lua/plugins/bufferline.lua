@@ -6,10 +6,10 @@ M.setup = function()
     require("bufferline").setup({
         options = {
             close_command = function(bufnr)
-                vim.api.nvim_buf_delete(bufnr, {})
+                require("mini.bufremove").delete(bufnr, false)
             end,
             right_mouse_command = function(bufnr)
-                vim.api.nvim_buf_delete(bufnr, {})
+                require("mini.bufremove").delete(bufnr, false)
             end,
             diagnostics = "nvim_lsp",
             always_show_bufferline = false,
