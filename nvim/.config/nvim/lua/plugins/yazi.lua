@@ -1,6 +1,8 @@
 local M = {}
 
 M.setup = function()
+    -- LuaLS cannot infer this plugin's annotated setup argument.
+    ---@diagnostic disable-next-line: redundant-parameter
     require("yazi").setup({
         -- Use same window style as your other plugins
         floating_window_scaling_factor = 0.9,

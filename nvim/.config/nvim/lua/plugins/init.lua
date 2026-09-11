@@ -1,5 +1,8 @@
-vim.pack.add({
-    "https://github.com/rebelot/kanagawa.nvim",
+-- Define the tmux-aware mappings ourselves so they can carry descriptions.
+vim.g.tmux_navigator_no_mappings = 1
+
+local packages = {
+    "https://github.com/akinsho/bufferline.nvim",
     "https://github.com/nvim-mini/mini.nvim",
     "https://github.com/nvim-treesitter/nvim-treesitter",
     "https://github.com/neovim/nvim-lspconfig",
@@ -18,10 +21,14 @@ vim.pack.add({
     "https://github.com/mikavilpas/yazi.nvim",
     "https://codeberg.org/andyg/leap.nvim.git",
     "https://github.com/chomosuke/typst-preview.nvim",
-})
+}
 
-require("plugins.colorscheme").setup()
+vim.list_extend(packages, require("omarchy.plugins").packages)
+vim.pack.add(packages)
+
+require("omarchy").setup()
 require("plugins.mini").setup()
+require("plugins.bufferline").setup()
 require("plugins.blink").setup()
 require("plugins.render-markdown").setup()
 -- require("plugins.obsidian-nvim").setup()
