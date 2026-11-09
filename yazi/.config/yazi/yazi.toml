@@ -26,22 +26,22 @@ ueberzug_offset = [ 0, 0, 0, 0 ]
 
 [opener]
 edit = [
-	{ run = '${EDITOR:-nvim} "$@"', block = true, desc = "Edit in $EDITOR", for = "unix" },
+	{ run = '${EDITOR:-nvim} %s', block = true, desc = "Edit in $EDITOR", for = "unix" },
 ]
 open = [
-	{ run = 'xdg-open "$1"', orphan = true, desc = "Open", for = "linux" },
+	{ run = 'xdg-open %s1', orphan = true, desc = "Open", for = "linux" },
 ]
 reveal = [
-	{ run = 'xdg-open "$(dirname "$1")"', orphan = true, desc = "Reveal", for = "linux" },
+	{ run = 'xdg-open %d1', orphan = true, desc = "Reveal", for = "linux" },
 ]
 extract = [
-	{ run = 'ya pub extract --list "$@"', desc = "Extract here", for = "unix" },
+	{ run = 'ya pub extract --list %s', desc = "Extract here", for = "unix" },
 ]
 play = [
-	{ run = 'mpv --force-window "$@"', orphan = true, desc = "Play in mpv", for = "unix" },
+	{ run = 'mpv --force-window %s', orphan = true, desc = "Play in mpv", for = "unix" },
 ]
 nvim = [
-	{ run = 'ghostty -e ${EDITOR:-nvim} "$@"', orphan = true, desc = "Open in Neovim", for = "linux" },
+	{ run = 'ghostty -e ${EDITOR:-nvim} %s', orphan = true, desc = "Open in Neovim", for = "linux" },
 ]
 
 [open]
