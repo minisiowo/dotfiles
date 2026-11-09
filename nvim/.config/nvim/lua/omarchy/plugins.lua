@@ -24,6 +24,7 @@ M.packages = {
 -- shorter Lua module. This map bridges the generated Omarchy file to vim.pack.
 M.modules = {
     ["bjarneo/aether.nvim"] = "aether",
+    ["omacom/aether.nvim"] = "aether",
     ["bjarneo/hackerman.nvim"] = "hackerman",
     ["catppuccin/nvim"] = "catppuccin",
     ["neanias/everforest-nvim"] = "everforest",
